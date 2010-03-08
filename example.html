@@ -1,0 +1,40 @@
+<html>
+	<head><title>Testing bibtex</title>
+	<script type="text/javascript" src="lib/BibTex-0.1.2.js"></script>
+	<style type="text/css">
+		span.undefined { color:red; }
+		li { list-style: none; }
+		#publications {padding-left: 0;}
+		.yearHeader, .typeHeader { background-color: #eee; font-size: 23px; letter-spacing:4px;}
+		.yearHeader td, .typeHeader td { padding-left: 0; padding: 10px; margin: 10px 0;}
+		.bibitem td { padding: 3px 0 3px 20px; border-bottom: 1px dashed #eee; }
+		li.bibitem { padding-bottom: 7px; }
+		li { padding-left: 20px; }
+		li.odd { background-color:#eee;}
+		.yearhidden, .typehidden, .hiddenheader, .hiddenCol { display: none;}
+		#pubTable thead {display:none;}
+		.yearstat {float:left;width:50px;border:1px solid gray;background-color:lightGray;-moz-border-radius:8px 8px 0 0;}
+		.yeartitle {float:left; font-size:14px; padding-top:3px; text-align:center; width:52px;}
+		.filters { font-size: 17px; padding: 15px; background-color:#efefef;border:1px solid #ccc; -moz-border-radius:20px; margin: 5px;}
+		.filters input {margin-left:10px; }
+		.clear {clear:both;}
+		#pubyeardetails {font-size:smaller;float:left; border:1px solid #eee; -moz-border-radius:10px;padding:5px;display:none;}
+		#pubyeardetails h3 {margin: 0;border-bottom:1px solid lightGray;}
+		#pubyeardetails ul {padding:0;}
+		#pubyeardetails li {padding:0;}
+	</style>
+	</head>
+	<body>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="jquery.lint.js"></script>-->
+    <script type="text/javascript" src="lib/jquery.tablesorter.min.js"></script> 
+    <script type="text/javascript" src="lib/protovis-r3.1.js"></script>
+		<script type="text/javascript" src="src/bib-publication-list.js"></script>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+        bibtexify("example.bib", "pubTable");
+    });
+</script>
+		<table id="pubTable"></table>
+	</body>
+</html>
