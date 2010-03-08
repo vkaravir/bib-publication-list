@@ -210,7 +210,10 @@ var bibtexify = (function($) {
     }
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
-        if (entryData.url) {
+        if (entryData.url && entryData.url.match(/.*\.pdf/)) {
+            itemStr += ' (<a title="PDF-version of this article" href="' + entryData.url +
+                '">pdf<\/a>)';
+        } else if (entryData.url) {
             itemStr += ' (<a title="This article online" href="' + entryData.url +
             '">link<\/a>)';
         } 
