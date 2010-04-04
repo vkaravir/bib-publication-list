@@ -1,20 +1,20 @@
 var bibtexify = (function($) {
     var htmlify = function(str) {
-        str = str.replace(/\\"\{a\}/g, '&auml;');
-        str = str.replace(/\{\\aa\}/g, '&aring;');
-        str = str.replace(/\\aa\{\}/g, '&aring;');
-        str = str.replace(/\\"a/g, '&auml;');
-        str = str.replace(/\\"\{o\}/g, '&ouml;');
-        str = str.replace(/\\'e/g, '&eacute;');
-        str = str.replace(/\\'\{e\}/g, '&eacute;');
-        str = str.replace(/\\'a/g, '&aacute;');
-        str = str.replace(/\\'A/g, '&Aacute;');
-        str = str.replace(/\\"o/g, '&ouml;');
-        str = str.replace(/\\ss\{\}/g, '&szlig;');
-        str = str.replace(/\{/g, '');
-        str = str.replace(/\}/g, '');
-        str = str.replace(/\\&/g, '&amp;');
-        str = str.replace(/--/g, '&ndash;');
+        str = str.replace(/\\"\{a\}/g, '&auml;')
+            .replace(/\{\\aa\}/g, '&aring;')
+            .replace(/\\aa\{\}/g, '&aring;')
+            .replace(/\\"a/g, '&auml;')
+            .replace(/\\"\{o\}/g, '&ouml;')
+            .replace(/\\'e/g, '&eacute;')
+            .replace(/\\'\{e\}/g, '&eacute;')
+            .replace(/\\'a/g, '&aacute;')
+            .replace(/\\'A/g, '&Aacute;')
+            .replace(/\\"o/g, '&ouml;')
+            .replace(/\\ss\{\}/g, '&szlig;')
+            .replace(/\{/g, '')
+            .replace(/\}/g, '')
+            .replace(/\\&/g, '&amp;')
+            .replace(/--/g, '&ndash;');
         return str;
     };
 
@@ -53,19 +53,20 @@ var bibtexify = (function($) {
         },
         importance: {
             'TITLE': 9999,
-            'article': 40,
-            'book': 50,
-            'conference': 33,
-            'inbook': 45,
-            'incollection': 30,
-            'inproceedings': 29,
-            'manual': 5,
-            'mastersthesis': 10,
             'misc': 0,
-            'phdthesis': 43,
-            'proceedings': 31,
-            'techreport': 8,
-            'unpublished': 2 },
+            'manual': 10,
+            'techreport': 20,
+            'mastersthesis': 30,
+            'inproceedings': 40,
+            'incollection': 50,
+            'proceedings': 60,
+            'conference': 70,
+            'article': 80,
+            'phdthesis': 90,
+            'inbook': 100,
+            'book': 110,
+            'unpublished': 120
+        },
         labels: {
             'article': 'Journal articles',
             'book': 'Books',
@@ -136,16 +137,16 @@ var bibtexify = (function($) {
         };
         var w = 550, h = 100,
             x = pv.Scale.ordinal(pv.range(yearstats.length)).splitBanded(0, w, 4.8/5),
-            y = pv.Scale.linear(0, 6).range(0, h);
-        var vis = new pv.Panel().width(w).height(h).bottom(20).
-            left(20).right(5).top(5);
+            y = pv.Scale.linear(0, max).range(0, h),
+            vis = new pv.Panel().width(w).height(h).bottom(20).
+                left(20).right(5).top(5);
 
         vis.canvas("pubchart");
         var bar = vis.add(pv.Bar).data(yearstats).
             left(function() { return x(this.index); } ).
             width(x.range().band).bottom(0).fillStyle("#eee").
             event("mouseover", function(d) { $("#pubyeardetails").html(stats2html(d)).show();}).
-            height(function(d) { return d.count*h/6; });
+            height(function(d) { return d.count*h/max; });
 
         bar.anchor("bottom").add(pv.Label).textStyle("black").
             text(function(d) { return d.count.toFixed(0);});
@@ -163,8 +164,8 @@ var bibtexify = (function($) {
         bibtex = new BibTex();
         bibtex.content = data;
         bibtex.parse();
-        var bibentries = [];
-        for (var index = 0; index < bibtex.data.length; index++) {
+        var bibentries = [], len = bibtex.data.length;
+        for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
             bibentries.push({
                 'year': item.year,
@@ -253,7 +254,7 @@ var bibtexify = (function($) {
                 '<input type="radio" name="sort" id="sortByType"><label for="sortByType">type</label>' +
                 '</div><div><strong>Show years</strong> <span id="yearFilters"></span>' + 
         '<strong>&nbsp;&nbsp;Show types</strong> <span id="typeFilters"></span></div>');
-        $.get(bibfile, bibdownloaded);
+        $.get(bibfile, bibdownloaded, "text");
         $("#sortByType").click(function(event) {
             typeBit = typeBit?0:1;
             var sorting = [[2,typeBit], [1,1]];
@@ -271,5 +272,4 @@ var bibtexify = (function($) {
             $pubTable.trigger("sorton",[sorting]); 
         });
     };
-
 })(jQuery);
