@@ -22,32 +22,40 @@ var bibtexify = (function($) {
     var $pubTable;
 
     var bib2html = {
+        authors2html: function(authorData) {
+            var authorsStr = '';
+            for (var index = 0; index < authorData.length; index++) {
+                if (index > 0) { authorsStr += ", "; }
+                authorsStr += authorData[index].last;
+            }
+            return htmlify(authorsStr);
+        },
         inproceedings: function(entryData) {
-            return authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". In <em>" + entryData.booktitle + 
                 ", pp. " + entryData.pages + 
                 ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
         },
         article: function(entryData) {
-            return authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". <em>" + entryData.journal + ", " + entryData.volume +
                 ((entryData.number)?"(" + entryData.number + ")":"")+ ", " + 
                 entryData.pages + ". " + 
                 ((entryData.address)?entryData.address + ".":"") + "<\/em>";
         },
         misc: function(entryData) {
-            return authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". " + 
                 ((entryData.howpublished)?entryData.howpublished + ". ":"") + 
                 ((entryData.note)?entryData.note + ".":"");
         },
         mastersthesis: function(entryData) {
-            return authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
             entryData.title + ". " + entryData.type + ". " +
             entryData.organization + ", " + entryData.school + ".";
         },
         techreport: function(entryData) {
-            return authors2html(entryData.author) + " (" + entryData.year + "): " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "): " + 
                 entryData.title + ". " + entryData.institution + ". " +
                 entryData.number + ". " + entryData.type + ".";
         },
@@ -85,6 +93,48 @@ var bibtexify = (function($) {
     bib2html.phdthesis = bib2html.mastersthesis;
     var stats = { };
     var years = [], types = [];
+    function createFilters() {
+        var parentElem = $("#yearFilters").html('').change(function(event) {
+            event.stopPropagation();
+            $("." + $(event.target).attr('id'), $pubTable).toggleClass('yearhidden');
+        });
+        var elemCreator = function(elemId) {
+            return $("<input/>").
+            attr({'type': 'checkbox', 
+                'checked': 'true',
+                'id': elemId });
+        };
+        var labelCreator = function(elemId, label) {
+            return $("<label/>").attr({'for': elemId}).html(label);
+        };
+        for (var item in years) {
+            parentElem.append(elemCreator('year' + item)).
+                    append(labelCreator('year' + item, 
+                            item));
+        }
+        parentElem = $("#typeFilters").html('').change(function(event) {
+            event.stopPropagation();
+            $("." + $(event.target).attr('id'), $pubTable).toggleClass('typehidden');
+        });
+        for (var item in types) {
+            parentElem.append(elemCreator('type' + item)).
+                    append(labelCreator('type' + item, 
+                            bib2html.labels[item].split(' ')[0]));
+        }
+    }
+    function entry2html(entryData) {
+        var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
+        if (entryData.url && entryData.url.match(/.*\.pdf/)) {
+            itemStr += ' (<a title="PDF-version of this article" href="' + entryData.url +
+                '">pdf<\/a>)';
+        } else if (entryData.url) {
+            itemStr += ' (<a title="This article online" href="' + entryData.url +
+            '">link<\/a>)';
+        } 
+        itemStr += '<\/li>';
+        return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
+    }
+
     function entries2table(bibentries) {
         var htmlStr = '<thead><tr><th>Title</th><th>Year</th><th>Type</th></thead><tbody>';
         bibentries.sort(function(a, b) { return b.year - a.year; });
@@ -160,6 +210,19 @@ var bibtexify = (function($) {
 
         vis.render();				
     }
+    function updateStats(item) {
+        if (!stats[item.year]) {
+            stats[item.year] = { 'count': 1, 'types': {} };
+            stats[item.year].types[item.entryType] = 1;
+        } else {
+            stats[item.year].count += 1;
+            if (stats[item.year].types[item.entryType]) {
+                stats[item.year].types[item.entryType] += 1;
+            } else {
+                stats[item.year].types[item.entryType] = 1;
+            }
+        }
+    }
     function bibdownloaded(data) {
         bibtex = new BibTex();
         bibtex.content = data;
@@ -180,68 +243,6 @@ var bibtexify = (function($) {
         }
 
     }
-    function createFilters() {
-        var filterInput, parentElem = $("#yearFilters").html('').change(function(event) {
-            event.stopPropagation();
-            $("." + $(event.target).attr('id'), $pubTable).toggleClass('yearhidden');
-        });
-        var elemCreator = function(elemId) {
-            return $("<input/>").
-            attr({'type': 'checkbox', 
-                'checked': 'true',
-                'id': elemId });
-        };
-        var labelCreator = function(elemId, label) {
-            return $("<label/>").attr({'for': elemId}).html(label);
-        };
-        for (var item in years) {
-            parentElem.append(elemCreator('year' + item)).
-                    append(labelCreator('year' + item, 
-                            item));
-        }
-        parentElem = $("#typeFilters").html('').change(function(event) {
-            event.stopPropagation();
-            $("." + $(event.target).attr('id'), $pubTable).toggleClass('typehidden');
-        });
-        for (var item in types) {
-            parentElem.append(elemCreator('type' + item)).
-                    append(labelCreator('type' + item, 
-                            bib2html.labels[item].split(' ')[0]));
-        }
-    }
-    function entry2html(entryData) {
-        var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
-        if (entryData.url && entryData.url.match(/.*\.pdf/)) {
-            itemStr += ' (<a title="PDF-version of this article" href="' + entryData.url +
-                '">pdf<\/a>)';
-        } else if (entryData.url) {
-            itemStr += ' (<a title="This article online" href="' + entryData.url +
-            '">link<\/a>)';
-        } 
-        itemStr += '<\/li>';
-        return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
-    }
-    function authors2html(authorData) {
-        var authorsStr = '';
-        for (var index = 0; index < authorData.length; index++) {
-            if (index > 0) { authorsStr += ", "; }
-            authorsStr += authorData[index].last;
-        }
-        return htmlify(authorsStr);
-    }
-    function updateStats(item) {
-        if (!stats[item.year]) {
-            stats[item.year] = { 'count': 1, 'types': {} };
-            stats[item.year].types[item.entryType] = 1;
-        } else {
-            stats[item.year].count += 1;
-            if (stats[item.year].types[item.entryType]) {
-                stats[item.year].types[item.entryType] += 1;
-            } else {
-                stats[item.year].types[item.entryType] = 1;
-            }
-        }
-    };
     return function(bibfile, bibElemId, opt) {
         options = $.extend({}, {'protovis': true}, opt);
         var yearBit = 1, typeBit = 0;
