@@ -184,7 +184,7 @@ var bibtexify = (function($) {
             });
             return str + '<\/ul>';
         };
-        var w = 550, h = 100,
+        var w = 500, h = 100,
             x = pv.Scale.ordinal(pv.range(yearstats.length)).splitBanded(0, w, 4.8/5),
             y = pv.Scale.linear(0, max).range(0, h),
             vis = new pv.Panel().width(w).height(h).bottom(20).
