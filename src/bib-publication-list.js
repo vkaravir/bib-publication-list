@@ -92,7 +92,7 @@ var bibtexify = (function($) {
     };
     bib2html.phdthesis = bib2html.mastersthesis;
     var stats = { };
-    var years = [], types = [];
+    var years = {}, types = {};
     function createFilters() {
         var parentElem = $("#yearFilters").html('').change(function(event) {
             event.stopPropagation();
@@ -107,20 +107,20 @@ var bibtexify = (function($) {
         var labelCreator = function(elemId, label) {
             return $("<label/>").attr({'for': elemId}).html(label);
         };
-        for (var item in years) {
-            parentElem.append(elemCreator('year' + item)).
-                    append(labelCreator('year' + item, 
-                            item));
-        }
+        //console.log(years.length);
+        $.each(years, function(key, value) {
+            parentElem.append(elemCreator('year' + key)).
+            append(labelCreator('year' + key, key));
+        });
         parentElem = $("#typeFilters").html('').change(function(event) {
             event.stopPropagation();
             $("." + $(event.target).attr('id'), $pubTable).toggleClass('typehidden');
         });
-        for (var item in types) {
-            parentElem.append(elemCreator('type' + item)).
-                    append(labelCreator('type' + item, 
-                            bib2html.labels[item].split(' ')[0]));
-        }
+        $.each(types, function(key, value) {
+            parentElem.append(elemCreator('type' + key)).
+            append(labelCreator('type' + key, 
+                    bib2html.labels[key].split(' ')[0]));
+        });
     }
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
@@ -139,41 +139,40 @@ var bibtexify = (function($) {
         var htmlStr = '<thead><tr><th>Title</th><th>Year</th><th>Type</th></thead><tbody>';
         bibentries.sort(function(a, b) { return b.year - a.year; });
         var prevYear = null, item, count = 0, header;
-        for (var index in bibentries) {
-            item = bibentries[index];
+        $.each(bibentries, function(index, item) {
             types[item.type] = item.type;
             header = item.year;
-            if (index === '0' || (prevYear && header != prevYear)) {
+            if (index == 0 || (prevYear && header != prevYear)) {
                 years[item.year] = true;
-                htmlStr += '<tr class="yearHeader year' + header + '"><td>' + header + 
-                    '<\/td><td class="hiddenCol">' + header + 
-                    '<\/td><td class="hiddenCol">' + bib2html.importance.TITLE +
-                    '<\/td><\/tr>';
+                htmlStr += '<tr class="yearHeader year' + header + '"><td>'
+                        + header + '<\/td><td class="hiddenCol">' + header
+                        + '<\/td><td class="hiddenCol">'
+                        + bib2html.importance.TITLE + '<\/td><\/tr>';
             }
             prevYear = header;
-            htmlStr += '<tr class="bibitem type' + item.type + ' year' + 
-                item.year + ((count%2===0)?'':' odd') + '"><td>' + 
-                item.html + '<\/td><td class="hiddenCol">' +
-                item.year + '<\/td><td class="hiddenCol">' + 
-                bib2html.importance[item.type] + '<\/td><\/tr>';
+            htmlStr += '<tr class="bibitem type' + item.type + ' year'
+                    + item.year + ((count % 2 === 0) ? '' : ' odd') + '"><td>'
+                    + item.html + '<\/td><td class="hiddenCol">' + item.year
+                    + '<\/td><td class="hiddenCol">'
+                    + bib2html.importance[item.type] + '<\/td><\/tr>';
             count++;
-        }
-        for (var type in types) {
-            htmlStr += '<tr class="typeHeader hiddenheader type' + type + '"><td>' + bib2html.labels[type] + 
+        });
+        $.each(types, function(key, value) {
+            htmlStr += '<tr class="typeHeader hiddenheader type' + key + '"><td>' + bib2html.labels[key] + 
                 '<\/td><td class="hiddenCol">2100<\/td><td class="hiddenCol">' + 
-                bib2html.importance[type] + '<\/td><\/tr>';
-        }
+                bib2html.importance[key] + '<\/td><\/tr>';
+        });
         htmlStr += "<\/tbody>";
         createFilters();
         return htmlStr;
     }
     function addProtovis() {
         var yearstats = [], max = 0;
-        for (item in stats) {
-            max = Math.max(max, stats[item].count);
-            yearstats.push({'year': item, 'count': stats[item].count, 
-                'item': stats[item], 'types': stats[item].types});
-        }
+        $.each(stats, function(key, value) {
+            max = Math.max(max, value.count);
+            yearstats.push({'year': key, 'count': value.count, 
+                'item': value, 'types': value.types});
+        });
         yearstats.sort(function(a, b) {
             return a.year - b.year; 
         });
