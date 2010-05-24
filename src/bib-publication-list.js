@@ -196,13 +196,19 @@ var bibtexify = (function($) {
         }
 
     }
-    return function(bibfile, bibElemId, opt) {
+    return function(bibsrc, bibElemId, opt) {
         options = $.extend({}, {'protovis': true}, opt);
         var yearBit = 1, typeBit = 0;
         $pubTable = $("#" + bibElemId);
-        $pubTable.before((options.protovis?'<div style="float:left;" id="pubchart"></div>':'') + 
+        $pubTable.before((options.protovis?'<div id="pubchart"></div>':'') + 
                 '<div id="pubyeardetails"></div>' +
                 '<div class="clear"></div>');
-        $.get(bibfile, bibdownloaded, "text");
+        var $bibSrc = $(bibsrc);
+        if ($bibSrc.length) {
+            bibdownloaded($bibSrc.html());
+            $bibSrc.hide();
+        } else {
+            $.get(bibsrc, bibdownloaded, "text");
+        }
     };
 })(jQuery);
