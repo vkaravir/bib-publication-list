@@ -55,7 +55,7 @@ var bibtexify = (function($) {
             entryData.organization + ", " + entryData.school + ".";
         },
         techreport: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "): " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". " + entryData.institution + ". " +
                 entryData.number + ". " + entryData.type + ".";
         },
@@ -76,52 +76,23 @@ var bibtexify = (function($) {
             'unpublished': 120
         },
         labels: {
-            'article': 'Journal articles',
-            'book': 'Books',
+            'article': 'Journal',
+            'book': 'Book',
             'conference': '',
-            'inbook': 'Book chapters',
+            'inbook': 'Book chapter',
             'incollection': '',
-            'inproceedings': 'Conference articles',
-            'manual': 'Manuals',
+            'inproceedings': 'Conference',
+            'manual': 'Manual',
             'mastersthesis': 'Thesis',
             'misc': 'Misc',
             'phdthesis': 'PhD Thesis',
-            'proceedings': 'Conference proceedings',
-            'techreport': 'Technical reports',
-            'unpublished': 'Unpublished papers'}
+            'proceedings': 'Conference proceeding',
+            'techreport': 'Technical report',
+            'unpublished': 'Unpublished'}
     };
     bib2html.phdthesis = bib2html.mastersthesis;
     var stats = { };
     var years = {}, types = {};
-    function createFilters() {
-        var parentElem = $("#yearFilters").html('').change(function(event) {
-            event.stopPropagation();
-            $("." + $(event.target).attr('id'), $pubTable).toggleClass('yearhidden');
-        });
-        var elemCreator = function(elemId) {
-            return $("<input/>").
-            attr({'type': 'checkbox', 
-                'checked': 'true',
-                'id': elemId });
-        };
-        var labelCreator = function(elemId, label) {
-            return $("<label/>").attr({'for': elemId}).html(label);
-        };
-        //console.log(years.length);
-        $.each(years, function(key, value) {
-            parentElem.append(elemCreator('year' + key)).
-            append(labelCreator('year' + key, key));
-        });
-        parentElem = $("#typeFilters").html('').change(function(event) {
-            event.stopPropagation();
-            $("." + $(event.target).attr('id'), $pubTable).toggleClass('typehidden');
-        });
-        $.each(types, function(key, value) {
-            parentElem.append(elemCreator('type' + key)).
-            append(labelCreator('type' + key, 
-                    bib2html.labels[key].split(' ')[0]));
-        });
-    }
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
         if (entryData.url && entryData.url.match(/.*\.pdf/)) {
@@ -135,37 +106,6 @@ var bibtexify = (function($) {
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
-    function entries2table(bibentries) {
-        var htmlStr = '<thead><tr><th>Title</th><th>Year</th><th>Type</th></thead><tbody>';
-        bibentries.sort(function(a, b) { return b.year - a.year; });
-        var prevYear = null, item, count = 0, header;
-        $.each(bibentries, function(index, item) {
-            types[item.type] = item.type;
-            header = item.year;
-            if (index == 0 || (prevYear && header != prevYear)) {
-                years[item.year] = true;
-                htmlStr += '<tr class="yearHeader year' + header + '"><td>'
-                        + header + '<\/td><td class="hiddenCol">' + header
-                        + '<\/td><td class="hiddenCol">'
-                        + bib2html.importance.TITLE + '<\/td><\/tr>';
-            }
-            prevYear = header;
-            htmlStr += '<tr class="bibitem type' + item.type + ' year'
-                    + item.year + ((count % 2 === 0) ? '' : ' odd') + '"><td>'
-                    + item.html + '<\/td><td class="hiddenCol">' + item.year
-                    + '<\/td><td class="hiddenCol">'
-                    + bib2html.importance[item.type] + '<\/td><\/tr>';
-            count++;
-        });
-        $.each(types, function(key, value) {
-            htmlStr += '<tr class="typeHeader hiddenheader type' + key + '"><td>' + bib2html.labels[key] + 
-                '<\/td><td class="hiddenCol">2100<\/td><td class="hiddenCol">' + 
-                bib2html.importance[key] + '<\/td><\/tr>';
-        });
-        htmlStr += "<\/tbody>";
-        createFilters();
-        return htmlStr;
-    }
     function addProtovis() {
         var yearstats = [], max = 0;
         $.each(stats, function(key, value) {
@@ -227,16 +167,30 @@ var bibtexify = (function($) {
         bibtex.content = data;
         bibtex.parse();
         var bibentries = [], len = bibtex.data.length;
+		var entryTypes = {};
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
-            bibentries.push({
-                'year': item.year,
-                'type': item.entryType,
-                'html': entry2html(item)
-            });
+            bibentries.push([item.year, bib2html.labels[item.entryType], entry2html(item)]);
+			entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             updateStats(item);
         }
-        $pubTable.append(entries2table(bibentries)).tablesorter();
+        jQuery.fn.dataTableExt.oSort['type-sort-asc'] = function(x, y) {
+            var item1 = bib2html.importance[entryTypes[x]], 
+                item2 = bib2html.importance[entryTypes[y]];
+            return ((item1 < item2) ? -1 : ((item1 > item2) ?  1 : 0));
+        };
+        jQuery.fn.dataTableExt.oSort['type-sort-desc'] = function(x, y) {
+            var item1 = bib2html.importance[entryTypes[x]], 
+                item2 = bib2html.importance[entryTypes[y]];
+            return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
+        };
+        $pubTable.dataTable({ 'aaData': bibentries, 
+                              'aaSorting': [[0, "desc"]], 
+                              'aoColumns': [ { "sTitle": "Year" },
+                                             { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
+                                             { "sTitle": "Publication" }],
+                              'bPaginate': false
+                            });
         if (options.protovis) {
             addProtovis();
         }
@@ -248,28 +202,7 @@ var bibtexify = (function($) {
         $pubTable = $("#" + bibElemId);
         $pubTable.before((options.protovis?'<div style="float:left;" id="pubchart"></div>':'') + 
                 '<div id="pubyeardetails"></div>' +
-                '<div class="clear"></div>' +
-                '<div><strong>Sort by</strong>' + 
-                '<input type="radio" checked="true" name="sort" id="sortByYear"><label for="sortByYear">year</label>' +
-                '<input type="radio" name="sort" id="sortByType"><label for="sortByType">type</label>' +
-                '</div><div><strong>Show years</strong> <span id="yearFilters"></span>' + 
-        '<strong>&nbsp;&nbsp;Show types</strong> <span id="typeFilters"></span></div>');
+                '<div class="clear"></div>');
         $.get(bibfile, bibdownloaded, "text");
-        $("#sortByType").click(function(event) {
-            typeBit = typeBit?0:1;
-            var sorting = [[2,typeBit], [1,1]];
-            $(".typeHeader", $pubTable).removeClass("hiddenheader");
-            $(".yearHeader", $pubTable).addClass("hiddenheader");
-            $pubTable.trigger("sorton",[sorting]);
-            yearBit = 0;
-        });
-        $("#sortByYear").click(function(event) {
-            yearBit = yearBit?0:1;
-            var sorting = [[1,yearBit], [2,1]]; 
-            $(".typeHeader", $pubTable).addClass("hiddenheader");
-            $(".yearHeader", $pubTable).removeClass("hiddenheader");
-            typeBit = 0;
-            $pubTable.trigger("sorton",[sorting]); 
-        });
     };
 })(jQuery);
