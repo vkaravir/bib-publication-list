@@ -1,90 +1,19 @@
 span.undefined { color:red; }
-li { list-style: none; }
-#publications {padding-left: 0;}
-.yearHeader, .typeHeader { background-color: #eee; font-size: 23px; letter-spacing:4px;}
-.yearHeader td, .typeHeader td { padding-left: 0; padding: 10px; margin: 10px 0;}
-.bibitem td { padding: 3px 0 3px 20px; border-bottom: 1px dashed #eee; }
-li.bibitem { padding-bottom: 7px; }
-li { padding-left: 20px; }
-li.odd { background-color:#eee;}
-.yearhidden, .typehidden, .hiddenheader/*, .hiddenCol*/ { display: none;}
-/*#pubTable thead {display:none;}*/
-#pubTable {width:100%;}
-.yearstat {float:left;width:50px;border:1px solid gray;background-color:lightGray;-moz-border-radius:8px 8px 0 0;}
-.yeartitle {float:left; font-size:14px; padding-top:3px; text-align:center; width:52px;}
-.filters { font-size: 17px; padding: 15px; background-color:#efefef;border:1px solid #ccc; -moz-border-radius:20px; margin: 5px;}
-.filters input {margin-left:10px; }
+#pubTable {width:100%; margin: 0 auto; clear: both;}
+#pubChart { float:left; }
 .clear {clear:both;}
-#pubyeardetails {font-size:smaller;float:left; border:1px solid #eee; -moz-border-radius:10px;padding:5px;display:none;}
+#pubyeardetails {font-size:smaller;float:left; padding:5px; display:none; border:1px solid #eee; -moz-border-radius:10px; -webkit-border-radius:10px; -o-border-radius:10px; border-radius:10px;}
 #pubyeardetails h3 {margin: 0;border-bottom:1px solid lightGray;}
 #pubyeardetails ul {padding:0;}
-#pubyeardetails li {padding:0;}
-
-table.display {
-    margin: 0 auto;
-    width: 100%;
-    clear: both;
-}
-
-table.display thead th {
-    padding: 3px 18px 3px 10px;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    font-weight: bold;
-    cursor: pointer;
-    cursor: hand;
-}
-
-table.display tfoot th {
-    padding: 3px 10px;
-    border-top: 1px solid black;
-    font-weight: bold;
-}
-
-table.display tr.heading2 td {
-    border-bottom: 1px solid #aaa;
-}
-
-table.display td {
-    padding: 3px 10px;
-}
-
-table.display td.center {
-    text-align: center;
-}
-
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * DataTables sorting
- */
-
-.sorting_asc {
-    background: url('lib/images/sort_asc.png') no-repeat center right;
-}
-
-.sorting_desc {
-    background: url('lib/images/sort_desc.png') no-repeat center right;
-}
-
-.sorting {
-    background: url('lib/images/sort_both.png') no-repeat center right;
-}
-
-.sorting_asc_disabled {
-    background: url('lib/images/sort_asc_disabled.png') no-repeat center right;
-}
-
-.sorting_desc_disabled {
-    background: url('lib/images/sort_desc_disabled.png') no-repeat center right;
-}
-
-
-tr.odd {
-    background-color: #eee;
-}
-
-tr.even {
-    background-color: white;
-}
-
+#pubyeardetails li {padding:0; list-style: none; }
+table.display thead th { padding: 3px 18px 3px 10px; border-bottom: 1px solid black; border-top: 1px solid black; font-weight: bold; cursor: pointer; cursor: hand; }
+table.display tfoot th { padding: 3px 10px; border-top: 1px solid black; font-weight: bold; }
+table.display td { padding: 3px 10px; }
+table.display td.center { text-align: center; }
+.sorting_asc { background: url('lib/images/sort_asc.png') no-repeat center right; }
+.sorting_desc { background: url('lib/images/sort_desc.png') no-repeat center right; }
+.sorting { background: url('lib/images/sort_both.png') no-repeat center right; }
+.sorting_asc_disabled { background: url('lib/images/sort_asc_disabled.png') no-repeat center right; }
+.sorting_desc_disabled { background: url('lib/images/sort_desc_disabled.png') no-repeat center right; }
+tr.odd { background-color: #eee; }
+tr.even { background-color: white; }
