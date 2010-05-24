@@ -13,7 +13,7 @@ var bibtexify = (function($) {
             .replace(/\\ss\{\}/g, '&szlig;')
             .replace(/\{/g, '')
             .replace(/\}/g, '')
-            .replace(/\\&/g, '&amp;')
+            .replace(/\\&/g, '&')
             .replace(/--/g, '&ndash;');
         return str;
     };
