@@ -30,6 +30,17 @@ var bibtexify = (function($) {
             }
             return htmlify(authorsStr);
         },
+        links: function(entryData) {
+            var itemStr = '';
+            if (entryData.url && entryData.url.match(/.*\.pdf/)) {
+                itemStr += ' (<a title="PDF-version of this article" href="' + entryData.url +
+                    '">pdf<\/a>)';
+            } else if (entryData.url) {
+                itemStr += ' (<a title="This article online" href="' + entryData.url +
+                '">link<\/a>)';
+            } 
+            return itemStr;
+        },
         inproceedings: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". In <em>" + entryData.booktitle + 
@@ -88,21 +99,15 @@ var bibtexify = (function($) {
             'phdthesis': 'PhD Thesis',
             'proceedings': 'Conference proceeding',
             'techreport': 'Technical report',
-            'unpublished': 'Unpublished'}
+            'unpublished': 'Unpublished'},
     };
     bib2html.phdthesis = bib2html.mastersthesis;
     var stats = { };
     var years = {}, types = {};
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
-        if (entryData.url && entryData.url.match(/.*\.pdf/)) {
-            itemStr += ' (<a title="PDF-version of this article" href="' + entryData.url +
-                '">pdf<\/a>)';
-        } else if (entryData.url) {
-            itemStr += ' (<a title="This article online" href="' + entryData.url +
-            '">link<\/a>)';
-        } 
-        itemStr += '<\/li>';
+        itemStr += bib2html.links(entryData);
+        console.log(itemStr);
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
@@ -168,6 +173,7 @@ var bibtexify = (function($) {
         bibtex.parse();
         var bibentries = [], len = bibtex.data.length;
 		var entryTypes = {};
+		jQuery.extend(true, bib2html, options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
             bibentries.push([item.year, bib2html.labels[item.entryType], entry2html(item)]);
@@ -200,9 +206,11 @@ var bibtexify = (function($) {
         options = $.extend({}, {'protovis': true}, opt);
         var yearBit = 1, typeBit = 0;
         $pubTable = $("#" + bibElemId);
-        $pubTable.before((options.protovis?'<div id="pubchart"></div>':'') + 
+        if (options.protovis) {
+            $pubTable.before('<div id="pubchart"></div>' + 
                 '<div id="pubyeardetails"></div>' +
                 '<div class="clear"></div>');
+        }
         var $bibSrc = $(bibsrc);
         if ($bibSrc.length) {
             bibdownloaded($bibSrc.html());
