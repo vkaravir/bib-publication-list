@@ -107,7 +107,6 @@ var bibtexify = (function($) {
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
         itemStr += bib2html.links(entryData);
-        console.log(itemStr);
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
