@@ -1,5 +1,6 @@
 var bibtexify = (function($) {
     var htmlify = function(str) {
+        // TODO: this is probably not a complete list..
         str = str.replace(/\\"\{a\}/g, '&auml;')
             .replace(/\{\\aa\}/g, '&aring;')
             .replace(/\\aa\{\}/g, '&aring;')
@@ -39,6 +40,26 @@ var bibtexify = (function($) {
                 itemStr += ' (<a title="This article online" href="' + entryData.url +
                 '">link<\/a>)';
             } 
+            return itemStr;
+        },
+        bibtex: function(entryData) {
+            var itemStr = '';
+            itemStr += ' (<a title="This article as BibTeX" href="#" class="biblink">bib</a>)<div class="bibinfo hidden">';
+            itemStr += '<a href="#" class="bibclose" title="Close">x</a><pre>';
+            itemStr += '@' + entryData.entryType + "{" + entryData.cite + ",\n";
+            $.each(entryData, function(key, value) {
+                if (key == 'author') {
+                    itemStr += '  author = { '
+                    for (var index = 0; index < value.length; index++) {
+                        if (index > 0) { itemStr += " and "; }
+                        itemStr += value[index].last;
+                    }
+                    itemStr += ' },\n';
+                } else if (key != 'entryType' && key != 'cite') {
+                    itemStr += '  ' + key + " = { " + value + " },\n";
+                }
+            });
+            itemStr += "}";
             return itemStr;
         },
         inproceedings: function(entryData) {
@@ -107,6 +128,7 @@ var bibtexify = (function($) {
     function entry2html(entryData) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
         itemStr += bib2html.links(entryData);
+        itemStr += bib2html.bibtex(entryData);
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
@@ -166,6 +188,16 @@ var bibtexify = (function($) {
             }
         }
     }
+    function showbib(event) {
+        $(this).next(".bibinfo").removeClass('hidden').addClass("open");
+        $("#shutter").show();
+        event.preventDefault();
+    }
+    function hidebib(event) {
+        $("#shutter").hide();
+        $(".bibinfo.open").removeClass("open").addClass("hidden");
+        event.preventDefault();
+    }
     function bibdownloaded(data) {
         bibtex = new BibTex();
         bibtex.content = data;
@@ -199,12 +231,15 @@ var bibtexify = (function($) {
         if (options.protovis) {
             addProtovis();
         }
-
+        $("#shutter").click(hidebib);
+        $(".biblink").live('click', showbib);
+        $(".bibclose").live('click', hidebib);
     }
     return function(bibsrc, bibElemId, opt) {
         options = $.extend({}, {'protovis': true}, opt);
         var yearBit = 1, typeBit = 0;
         $pubTable = $("#" + bibElemId);
+        $pubTable.before('<div id="shutter" class="hidden"></div>');
         if (options.protovis) {
             $pubTable.before('<div id="pubchart"></div>' + 
                 '<div id="pubyeardetails"></div>' +
