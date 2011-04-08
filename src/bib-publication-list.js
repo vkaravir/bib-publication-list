@@ -18,6 +18,25 @@ var bibtexify = (function($) {
             .replace(/--/g, '&ndash;');
         return str;
     };
+    var uriencode = function(str) {
+        // TODO: this is probably not a complete list..
+        str = str.replace(/\\"\{a\}/g, '%C3%A4')
+            .replace(/\{\\aa\}/g, '%C3%A5')
+            .replace(/\\aa\{\}/g, '%C3%A5')
+            .replace(/\\"a/g, '%C3%A4')
+            .replace(/\\"\{o\}/g, '%C3%B6')
+            .replace(/\\'e/g, '%C3%A9')
+            .replace(/\\'\{e\}/g, '%C3%A9')
+            .replace(/\\'a/g, '%C3%A1')
+            .replace(/\\'A/g, '%C3%81')
+            .replace(/\\"o/g, '%C3%B6')
+            .replace(/\\ss\{\}/g, '%C3%9F')
+            .replace(/\{/g, '')
+            .replace(/\}/g, '')
+            .replace(/\\&/g, '%26')
+            .replace(/--/g, '%E2%80%93');
+        return str;
+    };
 
     var options;
     var $pubTable;
@@ -59,8 +78,31 @@ var bibtexify = (function($) {
                     itemStr += '  ' + key + " = { " + value + " },\n";
                 }
             });
-            itemStr += "}";
+            itemStr += "}</pre></div>";
             return itemStr;
+        },
+        tweet: function(entryData) {
+          // <a href="http://twitter.com/share?url=http%3A%2F%2Fdev.twitter.com%2Fpages%2Ftweet-button" target="_blank">Tweet</a>
+          // url, via, text
+          var itemStr = ' (<a title="Tweet this article" href="http://twitter.com/share?url=';
+          itemStr += entryData.url;
+          itemStr += '&via=' + options.tweet;
+          itemStr += '&text=';
+          var splitName = function(wholeName) {
+            var spl = wholeName.split(' ');
+            return spl[spl.length-1];
+          }
+          var auth = entryData.author;
+          if (auth.length == 1) {
+            itemStr += uriencode(splitName(auth[0].last));
+          } else if (auth.length == 2) {
+            itemStr += uriencode(splitName(auth[0].last) + "%26" + splitName(auth[1].last));
+          } else {
+            itemStr += uriencode(splitName(auth[0].last) + " et al");
+          }
+          itemStr += ": " + encodeURIComponent('"' + entryData.title + '"');
+          itemStr += '" target="_blank">tweet</a>)';
+          return itemStr;
         },
         inproceedings: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
@@ -129,6 +171,9 @@ var bibtexify = (function($) {
         var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
         itemStr += bib2html.links(entryData);
         itemStr += bib2html.bibtex(entryData);
+        if (options.tweet && entryData.url) {
+          itemStr += bib2html.tweet(entryData);
+        }
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
