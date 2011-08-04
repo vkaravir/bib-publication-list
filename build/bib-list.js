@@ -2705,7 +2705,7 @@ if(bInitHandedOff===false){_fnInitalise(oSettings)}})}})(jQuery);if(!Array.proto
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
             bibentries.push([item.year, bib2html.labels[item.entryType], entry2html(item)]);
-			entryTypes[bib2html.labels[item.entryType]] = item.entryType;
+			      entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             updateStats(item);
         }
         jQuery.fn.dataTableExt.oSort['type-sort-asc'] = function(x, y) {
@@ -2719,7 +2719,7 @@ if(bInitHandedOff===false){_fnInitalise(oSettings)}})}})(jQuery);if(!Array.proto
             return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
         };
         $pubTable.dataTable({ 'aaData': bibentries, 
-                              'aaSorting': [[0, "desc"]], 
+                              'aaSorting': options.sorting, 
                               'aoColumns': [ { "sTitle": "Year" },
                                              { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
                                              { "sTitle": "Publication" }],
@@ -2733,7 +2733,7 @@ if(bInitHandedOff===false){_fnInitalise(oSettings)}})}})(jQuery);if(!Array.proto
         $(".bibclose").live('click', hidebib);
     }
     return function(bibsrc, bibElemId, opt) {
-        options = $.extend({}, {'protovis': true}, opt);
+        options = $.extend({}, {'protovis': true, 'sorting': [[0, "desc"], [1, "desc"]]}, opt);
         var yearBit = 1, typeBit = 0;
         $pubTable = $("#" + bibElemId);
         $pubTable.before('<div id="shutter" class="hidden"></div>');
