@@ -1,0 +1,62 @@
+bib-publication-list to automatically generate an interactive HTML publication list from a BibTeX file
+
+Getting Started
+===============
+First, load the required JavaScript files:
+
+<script src="protovis-r3.1.js"></script> <!-- if you want the visualization -->
+<script src="jquery.min.js"></script>
+<script src="bib-list-min.js"></script>
+
+All you need to do is to include the BibTeX into an HTML page and tell the script to turn it 
+into a sortable and searchable table. For example:
+
+<table id="pubTable" class="display"></table>
+<pre id="bibtex">@article{Karavirta:JVLCTaxonomy,
+title = {A comprehensive taxonomy of algorithm animation languages},
+journal = {Journal of Visual Languages \& Computing},
+volume = {20},
+number = {1},
+pages = {1--22},
+year = {2010},
+issn = {1045-926X},
+doi = {DOI: 10.1016/j.jvlc.2009.09.001},
+author = {Ville Karavirta and Ari Korhonen and Lauri Malmi and Thomas Naps}
+}
+</pre>
+
+Finally, the bib-publication-list needs to know the input data element and the output table. So, one 
+line of JavaScript:
+
+bibtexify("#bibtex", "pubTable");
+
+Alternatively, the bibtex can be loaded from a file. Personally I prefer including it in the HTML, 
+though. This way, browsers without JavaScript enabled get at least to see the bibtex instead of a blank page.
+This causes an ugly-looking flash of unstyled content, though.
+
+bibtexify("example-biblist.bib", "pubTable");
+
+The result looks like my publication list at: http://villekaravirta.com/publications/.
+
+
+Configuration Options
+=====================
+The bibtexify function accepts an optional third parameter for configuration options. These options include:
+
+protovis     A boolean to control addition of the visualization. Defaults to true.
+             If set to false, protovis JavaScript file is not needed.
+tweet        Twitter username to add Tweet links to bib items with a url field.
+sorting      Control the default sorting of the list. Defaults to [[0, "desc"], [1, "desc"]].
+             See http://datatables.net/api fnSort for details on formatting.
+
+
+Building from source
+====================
+There is a Jakefile for building the combined and minified versions with Jake (https://github.com/mde/jake).
+
+
+Credits
+=======
+This code uses some great libraries: jQuery (http://jquery.com/), DataTables (http://datatables.net/),
+Protovis (http://vis.stanford.edu/protovis/), and JavaScript BibTeX Parser
+(http://sourceforge.net/projects/jsbibtex/).
