@@ -52,7 +52,8 @@ sorting      Control the default sorting of the list. Defaults to [[0, "desc"], 
 
 Building from source
 ====================
-There is a Jakefile for building the combined and minified versions with Jake (https://github.com/mde/jake).
+There is a Jakefile for building the combined and minified versions with Jake (https://github.com/mde/jake)
+and a Makefile for building with make.
 
 
 Credits
