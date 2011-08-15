@@ -88,7 +88,7 @@
  * Example 1. Loading a BibTex File and printing the parsed array
  * <script src="BibTex.js"></script>
  * <script>
- * bibtex�=�new�BibTex();
+ * bibtex = new BibTex();
  * bibtex.content = content; // the bibtex content as a string
  * 
  * bibtex->parse();
@@ -116,15 +116,15 @@
  * Example of setting options in the constructor:
  * 
  * Example 2. Setting options in the constructor
- * bibtex�=�new�BibTex({'validate':false,�'unwrap':true});
+ * bibtex = new BibTex({'validate':false, 'unwrap':true});
  * 
  * 
  * Example of setting options using the method setOption():
  * 
  * Example 62-3. Setting options using setOption
- * bibtex�=�new�BibTex();
- * bibtex.setOption('validate',�false);
- * bibtex.setOption('unwrap',�true);
+ * bibtex = new BibTex();
+ * bibtex.setOption('validate', false);
+ * bibtex.setOption('unwrap', true);
  * 
  * Stored Data
  * ------------
@@ -159,16 +159,16 @@
  * To add an entry simply create a hash table with the needed keys and
  * values and call the method addEntry().
  * Example 4. Adding an entry
- * bibtex�������������������������=�new�BibTex();
- * var addarray�����������������������=�{};
- * addarray['entryType']����������=�'Article';
- * addarray['cite']���������������=�'art2';
- * addarray['title']��������������=�'Titel�of�the�Article';
+ * bibtex                         = new BibTex();
+ * var addarray                   = {};
+ * addarray['entryType']          = 'Article';
+ * addarray['cite']               = 'art2';
+ * addarray['title']              = 'Titel of the Article';
  * addarray['author'] = [];
- * addarray['author'][0]['first']�=�'John';
- * addarray['author'][0]['last']��=�'Doe';
- * addarray['author'][1]['first']�=�'Jane';
- * addarray['author'][1]['last']��=�'Doe';
+ * addarray['author'][0]['first'] = 'John';
+ * addarray['author'][0]['last']  = 'Doe';
+ * addarray['author'][1]['first'] = 'Jane';
+ * addarray['author'][1]['last']  = 'Doe';
  * bibtex.addEntry(addarray);
  */
 
@@ -2637,7 +2637,15 @@ if(bInitHandedOff===false){_fnInitalise(oSettings)}})}})(jQuery);if(!Array.proto
                 'item': value, 'types': value.types});
         });
         yearstats.sort(function(a, b) {
-            return a.year - b.year; 
+            var diff = a.year - b.year;
+            if (!isNaN(diff)) {
+              return diff;
+            } else if (a.year < b.year) {
+              return -1;
+            } else if (a.year > b.year) {
+              return 1;
+            }
+            return 0; 
         });
         var stats2html = function(item) {
             var str = '<h3>' + item.year + ' (total ' + item.count + ')<\/h3>';

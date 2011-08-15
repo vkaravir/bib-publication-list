@@ -185,7 +185,15 @@ var bibtexify = (function($) {
                 'item': value, 'types': value.types});
         });
         yearstats.sort(function(a, b) {
-            return a.year - b.year; 
+            var diff = a.year - b.year;
+            if (!isNaN(diff)) {
+              return diff;
+            } else if (a.year < b.year) {
+              return -1;
+            } else if (a.year > b.year) {
+              return 1;
+            }
+            return 0; 
         });
         var stats2html = function(item) {
             var str = '<h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
