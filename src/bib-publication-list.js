@@ -1,3 +1,4 @@
+
 var bibtexify = (function($) {
     var htmlify = function(str) {
         // TODO: this is probably not a complete list..
@@ -162,7 +163,7 @@ var bibtexify = (function($) {
             'phdthesis': 'PhD Thesis',
             'proceedings': 'Conference proceeding',
             'techreport': 'Technical report',
-            'unpublished': 'Unpublished'},
+            'unpublished': 'Unpublished'}
     };
     bib2html.phdthesis = bib2html.mastersthesis;
     var stats = { };
@@ -252,7 +253,7 @@ var bibtexify = (function($) {
         event.preventDefault();
     }
     function bibdownloaded(data) {
-        bibtex = new BibTex();
+        var bibtex = new BibTex();
         bibtex.content = data;
         bibtex.parse();
         var bibentries = [], len = bibtex.data.length;
@@ -281,7 +282,8 @@ var bibtexify = (function($) {
                                              { "sTitle": "Publication" }],
                               'bPaginate': false
                             });
-        if (options.protovis) {
+        // visualization does not work in IE, so leave it out
+        if (options.protovis && !$.browser.msie) {
             addProtovis();
         }
         $("#shutter").click(hidebib);
