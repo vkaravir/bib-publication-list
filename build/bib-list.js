@@ -2727,17 +2727,32 @@ var bibtexify = (function($) {
                 item2 = bib2html.importance[entryTypes[y]];
             return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
         };
-        $pubTable.dataTable({ 'aaData': bibentries, 
+        var table = $pubTable.dataTable({ 'aaData': bibentries, 
                               'aaSorting': options.sorting, 
                               'aoColumns': [ { "sTitle": "Year" },
                                              { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
-                                             { "sTitle": "Publication" }],
+                                             { "sTitle": "Publication", "bSortable": false }],
                               'bPaginate': false
                             });
         // visualization does not work in IE, so leave it out
         if (options.protovis && !$.browser.msie) {
             addProtovis();
         }
+        $("th", $pubTable).unbind("click").click(function(e) {
+          var $this = $(this),
+              $thElems = $this.parent().find("th"),
+              index = $thElems.index($this);
+          if ($this.hasClass("sorting_disabled")) { return; }
+          $this.toggleClass("sorting_asc").toggleClass("sorting_desc");
+
+          if (index === 0) {
+            table.fnSort( [[0, $thElems.eq(0).hasClass("sorting_asc")?"asc":"desc"],
+                        [1, $thElems.eq(1).hasClass("sorting_asc")?"asc":"desc"]]);
+          } else {
+            table.fnSort( [[1, $thElems.eq(1).hasClass("sorting_asc")?"asc":"desc"],
+                          [0, $thElems.eq(0).hasClass("sorting_asc")?"asc":"desc"]]);
+          }
+        });
         $("#shutter").click(hidebib);
         $(".biblink").live('click', showbib);
         $(".bibclose").live('click', hidebib);
