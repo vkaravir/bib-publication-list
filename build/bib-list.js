@@ -2649,9 +2649,9 @@ var bibtexify = (function($) {
             return 0; 
         });
         var stats2html = function(item) {
-            var str = '<div class="bibstatlegens"><h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
+            var types = [],
+                str = '<h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
             str += '<ul>';
-            var types = [];
             $.each(item.types, function(type, value) {
               types.push(type);
             });
@@ -2662,7 +2662,7 @@ var bibtexify = (function($) {
               var type = types[i];
               str+='<li>'+bib2html.labels[type]+' '+item.types[type]+'<\/li>';
             };
-            return str + '<\/ul><\/div>';
+            return str + '<\/ul>';
         };
         var w = 500, h = 100,
             x = pv.Scale.ordinal(pv.range(yearstats.length)).splitBanded(0, w, 4.8/5),
