@@ -2649,12 +2649,20 @@ var bibtexify = (function($) {
             return 0; 
         });
         var stats2html = function(item) {
-            var str = '<h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
+            var str = '<div class="bibstatlegens"><h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
             str += '<ul>';
+            var types = [];
             $.each(item.types, function(type, value) {
-                str += '<li>' + bib2html.labels[type] + ' ' + value + '<\/li>';
+              types.push(type);
             });
-            return str + '<\/ul>';
+            types.sort(function(x, y) {
+              return bib2html.importance[y] - bib2html.importance[x];
+            });
+            for (var i = 0; i < types.length; i++) {
+              var type = types[i];
+              str+='<li>'+bib2html.labels[type]+' '+item.types[type]+'<\/li>';
+            };
+            return str + '<\/ul><\/div>';
         };
         var w = 500, h = 100,
             x = pv.Scale.ordinal(pv.range(yearstats.length)).splitBanded(0, w, 4.8/5),
