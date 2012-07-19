@@ -2567,7 +2567,7 @@ var bibtexify = (function($) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". <em>" + entryData.journal + ", " + entryData.volume +
                 ((entryData.number)?"(" + entryData.number + ")":"")+ ", " + 
-                entryData.pages + ". " + 
+                "pp. " + entryData.pages + ". " + 
                 ((entryData.address)?entryData.address + ".":"") + "<\/em>";
         },
         misc: function(entryData) {
@@ -2585,6 +2585,19 @@ var bibtexify = (function($) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
                 entryData.title + ". " + entryData.institution + ". " +
                 entryData.number + ". " + entryData.type + ".";
+        },
+        book: function(entryData) {
+            return this.authors2html(entryData.author) + ", <em>" + entryData.title + "<\/em>, " +
+            entryData.publisher + ", " + entryData.year + ((entryData.issn)?", ISBN: " + entryData.issn + ".":".");
+        },
+        inbook: function(entryData) {
+            return this.authors2html(entryData.author) + ", \"" + entryData.chapter +
+                "\" in <em>" + entryData.title + "<\/em>, " +
+                ((entryData.editor)?" Edited by " + entryData.editor + ", ":"") +
+                entryData.publisher + ", pp. " + entryData.pages + ", " +
+                ((entryData.series)?"<em>" + entryData.series + "<\/em>, ":"") +
+                ((entryData.volume)?"Vol. " + entryData.volume + ", ":"") +
+                entryData.year + ((entryData.issn)?", ISBN: " + entryData.issn + ".":".");
         },
         importance: {
             'TITLE': 9999,
