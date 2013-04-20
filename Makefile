@@ -4,7 +4,7 @@ MINIMIZE = java -jar tools/yuicompressor-2.4.6.jar --nomunge --preserve-semi -o 
 CAT = cat
 SRC = src
 TARGET = build
-SOURCES = $(LIB)/BibTex-0.1.2.js $(LIB)/jquery.dataTables.min.js $(LIB)/protovis-r3.1.js $(SRC)/bib-publication-list.js
+SOURCES = $(LIB)/BibTex-0.1.2.js $(LIB)/jquery.dataTables.min.js $(SRC)/bib-publication-list.js
 
 all: build
 

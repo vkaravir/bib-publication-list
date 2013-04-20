@@ -1,475 +1,636 @@
+<!doctype html>
+</body>
+</html>
 <html>
 	<head>
 		<title>Testing bibtex</title>
 		<link rel="stylesheet" href="bib-publication-list.css"/>
 	</head>
 	<body>
+    <noscript>
+      <!-- bibtex source hidden by default, show it if JS disabled -->
+      <style>
+      #bibtex { display: block;}
+      </style>
+    </noscript>
 		<table id="pubTable" class="display"></table>
-        <pre id="bibtex">
+        <pre id="bibtex" style="display:none;">
+@InProceedings{Karavirta:APlus,
+  author = {Ville Karavirta and Petri Ihantola and Teemu Koskinen},
+  title = {Service-Oriented Approach to Improve Interoperability of e-Learning Systems},
+  booktitle = {13th IEEE International Conference on Advanced Learning Technologies},
+  year = {To Appear},
+  pages = {5}
+}
+@InProceedings{Karavirta:SpatialJSAV,
+  author = {Ville Karavirta},
+  title = {Location-Aware Mobile Learning of Spatial Algorithms},
+  booktitle = {IADIS International Conference on Mobile Learning 2013},
+  year = {To Appear},
+  pages = {5}
+}
+@InProceedings{Karavirta:JSAV,
+  author = {Ville Karavirta and Clifford A. Shaffer},
+  title = {JSAV: JavaScript Algorithm Visualization Library},
+  booktitle = {ACM SIGCSE Conference on Innovation and Technology in Computer Science Education},
+  year = {To Appear},
+  pages = {6}
+}
+@InProceedings{Helminen:ParsonsFeedback,
+  author = {Juha Helminen and Satu Alaoutinen and Petri Ihantola and Ville Karavirta},
+  title = {How Do Students Solve Parsons Programming Problems? -- Execution-based vs. line-based feedback},
+  booktitle = {Learning and Teaching in Computing and Engineering},
+  year = {To Appear},
+  pages = {7}
+}
+@InProceedings{Karavirta:JSAVHeaps,
+  author = {Ville Karavirta and Ari Korhonen and Otto Sepp\"{a}l\"{a}},
+  title = {Misconceptions in Visual Algorithm Simulation Revisited: On UI's Effect on Student Performance, Attitudes, and Misconceptions},
+  booktitle = {Learning and Teaching in Computing and Engineering},
+  year = {To Appear},
+  pages = {8}
+}
 
-          @article{Karavirta:JVLCTaxonomy,
-          title = {A comprehensive taxonomy of algorithm animation languages},
-          journal = {Journal of Visual Languages \& Computing},
-          volume = {20},
-          number = {1},
-          pages = {1--22},
-          year = {2010},
-          issn = {1045-926X},
-          doi = {DOI: 10.1016/j.jvlc.2009.09.001},
-          url = {http://www.sciencedirect.com/science/article/B6WMM-4XBR4NN-1/2/32dd4b4e05e9eca125e9600b9fc235f7},
-          author = {Ville Karavirta and Ari Korhonen and Lauri Malmi and Thomas Naps}
+@InProceedings{Karavirta:MobileParsons,
+  author = {Ville Karavirta and Juha Helminen and Petri Ihantola},
+  title = {A Mobile Learning Application for Parsons Problems with Automatic Feedback},
+  booktitle = {Proceedings of the 12th Koli Calling International Conference on Computing Education Research},
+  year = {2012},
+  url = {http://dl.acm.org/authorize?6860241},
+  pages = {11--18}
+}
+
+@InProceedings{Karavirta:BSTAcceleration,
+  author = {Ville Karavirta and Lasse Hakulinen},
+  title = {Educational Accelerometer Games for Computer Science},
+  booktitle = {Proceedings of the 11th World Conference on Mobile and Contextual Learning},
+  year = {2012},
+  pages = {216--219},
+  url = {http://ceur-ws.org/Vol-955/papers/paper_28.pdf}
+}
+@InProceedings{Helminen:ParsonAnalysis,
+  author = {Juha Helminen and Petri Ihantola and Ville Karavirta and Lauri Malmi},
+  title = {How Do Students Solve Parsons Programming Problems? -- An Analysis of Interaction Traces},
+  booktitle = {Proceedings of the 8th International Computing Education Research Conference},
+  year = {2012},
+  pages = {119--126},
+  url = {http://dl.acm.org/authorize?6724413},
+  address = {Auckland, New Zealand}
+}
+  
+@InProceedings{Koskinen:WPSecurity,
+  author = {Teemu Koskinen and Petri Ihantola and Ville Karavirta},
+  title = {Quality Of WordPress Plug-Ins: An Overview of Security and User
+Ratings},
+  booktitle = {Proceedings of the Third International Workshop on Security and Privacy in Social Networks},
+  year = {2012},
+  pages = {4},
+address = {Amsterdam, Netherlands},
+url = {villekaravirta.com/files/SPSN2012-quality-of-wordpress-plugins.pdf}
+}
+@inbook{Karavirta:MapsBook,
+  author = {Ville Karavirta and Ari Korhonen},
+  chapter = {Visual Algorithm Simulation Exercises with Authentic Data Sets},
+  title = {Towards Learning and Instruction in Web 3.0: Advances in Cognitive and Educational Psychology},
+  publisher = {Springer Verlag},
+  year = {2012},
+  editor = {P. Isaias, D. Ifenthaler, Kinshuk, D.G. Sampson, and J.M. Spector},
+  pages = {123--137},
+  address = {New York, NY, USA},
+  url = {http://dx.doi.org/10.1007/978-1-4614-1539-8_8}
+}
+          @inproceedings{Shaffer:OpenDSA,
+            author = {Clifford A. Shaffer and Ville Karavirta and Ari Korhonen and Thomas L. Naps},
+            title = {OpenDSA: Beginning a Community Active-eBook Project.},
+            booktitle = {Proceedings of the 11th Koli Calling International Conference on Computing Education Research},
+            year = {2011},
+            pages = {112--117},
+            location = {Joensuu, Finland},
+            url = {http://dl.acm.org/authorize?6537598}
           }
-
-          @inproceedings{Karavirta:GMaps,
-          	author = {Ville Karavirta},
-          	title = {Real-World, Student Selectable Data for Education -- Learning graph Algorithms},
-          	year = {2010},
-            booktitle = {Proceedings of the IADIS International Conference Cognition and Exploratory Learning in Digital Age},
-            pages = {129--136},
-            address = {Timisoara, Romania},
-            month = {October}
+          @inproceedings{Karavirta:MobilePerspectives,
+            title = {Perspectives on Algorithm Visualization on Mobile Devices},
+            author = {Ville Karavirta},
+            year = {2011},
+            booktitle = {Proceedings of the Sixth Program Visualization Workshop},
+            pages = {59--65},
+            address = {Darmstadt, Germany}
           }
-
-          @InProceedings{Karavirta:JSAssess,
+          @inproceedings{Karavirta:InitialAVServices,
+            title = {Initial Set of Services for Algorithm Visualization},
             author = {Ville Karavirta and Petri Ihantola},
-            title = {Automatic Assessment of JavaScript Exercises},
-            keywords = {automatic assessment
-          javascript},
-            booktitle = {Proceedings of 1st Educators' Day on Web Engineering Curricula (WECU 2010)},
-            year = {2010},
-            publisher = {CEUR-WS.org},
-            OPTeditor = {},
-            edition = {},
-            address = {Vienna, Austria, July 6, 2010},
-            OPTvolume = {},
-            OPTnumber = {},
-            pages = {1-10},
-            OPTmonth = {},
-            OPTnote = {},
-            url = {http://ceur-ws.org/Vol-607/paper9.pdf}
+            year = {2011},
+            booktitle = {Proceedings of the Sixth Program Visualization Workshop},
+            pages = {67--71},
+            address = {Darmstadt, Germany}
+          }
+          @inproceedings{Ihantola:VisualFeedback,
+            title = {Automated Visual Feedback from Programming Assignments},
+            author = {Petri Ihantola and Ville Karavirta and Otto Sepp\"{a}l\"{a}},
+            year = {2011},
+            booktitle = {Proceedings of the Sixth Program Visualization Workshop},
+            pages = {87--95},
+            address = {Darmstadt, Germany}
+          }
+          @article{Ihantola:Parsons,
+          title = {Two-Dimensional Parson's Puzzles: The Concept, Tools, and First Observations},
+          journal = {Journal of Information Technology Education: Innovations in Practice},
+          volume = {10},
+          pages = {1--14},
+          year = {2011},
+          author = {Petri Ihantola and Ville Karavirta},
+          url = {http://www.jite.org/documents/Vol10/JITEv10IIPp119-132Ihantola944.pdf}
           }
 
-          @InProceedings{Karavirta:JSPoster,
-            author = {Ville Karavirta and Petri Ihantola},
-            title = {Serverless Automatic Assessment of JavaScript Exercises},
-            booktitle = {ITiCSE '10: Proceedings of the 15th annual ACM SIGCSE conference on Innovation and technology in computer science education},
-            year = {2010},
-            isbn = {978-1-60558-729-5},
-            pages = {302--302},
-            location = {Bilkent, Ankara, Turkey},
-            doi = {http://doi.acm.org/10.1145/1822090.1822178},
-            publisher = {ACM},
-            address = {New York, NY, USA}
-          }
+@InProceedings{Karavirta:JSPoster,
+  author = {Ville Karavirta and Petri Ihantola},
+  title = {Serverless Automatic Assessment of JavaScript Exercises},
+  booktitle = {ITiCSE '10: Proceedings of the 15th annual ACM SIGCSE conference on Innovation and technology in computer science education},
+  year = {2010},
+  isbn = {978-1-60558-729-5},
+  pages = {302--302},
+  location = {Bilkent, Ankara, Turkey},
+  doi = {http://doi.acm.org/10.1145/1822090.1822178},
+  url = {http://dl.acm.org/authorize?367582},
+  publisher = {ACM},
+  address = {New York, NY, USA}
+}
 
-          @InProceedings{Ihantola:ParsonPoster,
-            author = {Petri Ihantola and Ville Karavirta},
-            title = {Open Source Widget for Parson's Puzzles},
-            booktitle = {ITiCSE '10: Proceedings of the 15th annual ACM SIGCSE conference on Innovation and technology in computer science education},
-            year = {2010},
-            isbn = {978-1-60558-729-5},
-            pages = {302--302},
-            location = {Bilkent, Ankara, Turkey},
-            doi = {http://doi.acm.org/10.1145/1822090.1822178},
-            publisher = {ACM},
-            address = {New York, NY, USA}
-          }
+@InProceedings{Ihantola:ParsonPoster,
+  author = {Petri Ihantola and Ville Karavirta},
+  title = {Open Source Widget for Parson's Puzzles},
+  booktitle = {ITiCSE '10: Proceedings of the 15th annual ACM SIGCSE conference on Innovation and technology in computer science education},
+  year = {2010},
+  isbn = {978-1-60558-729-5},
+  pages = {302--302},
+  location = {Bilkent, Ankara, Turkey},
+  doi = {http://doi.acm.org/10.1145/1822090.1822178},
+  url = {http://dl.acm.org/authorize?367581},
+  publisher = {ACM},
+  address = {New York, NY, USA}
+}
 
-          @inproceedings{Korhonen:TRAKLA2Tool,
-            responsibleauthor = "Korhonen, Ari",
-            editor = "Pears, Arnold and Schulte, Carsten",
-            author = "Ari Korhonen and Juha Helminen and Ville Karavirta and Otto Sepp\"{a}l\"{a}",
-            comment = "Conference: 9th Koli Calling International Conference on Computing Education Research, Koli, Finland, October 29 – November 1, 2009",
-            month = "November",
-            pages = "43--46",
-            address = "Uppsala University",
-            publisher = "University of Joensuu",
-            year = "2010",
-            issn = "1404-3203",
-            title = "TRAKLA2",
-            booktitle = "Proceedings of the 9th Koli Calling International Conference on Computing Education Research",
-            url = "http://www.it.uu.se/research/publications/reports/2010-027/2010-027.pdf"
-          }
+@inproceedings{Korhonen:TRAKLA2Tool,
+  responsibleauthor = "Korhonen, Ari",
+  editor = "Pears, Arnold and Schulte, Carsten",
+  author = "Ari Korhonen and Juha Helminen and Ville Karavirta and Otto Seppälä",
+  comment = "Conference: 9th Koli Calling International Conference on Computing Education Research, Koli, Finland, October 29 – November 1, 2009",
+  month = "November",
+  pages = "43--46",
+  address = "Uppsala University",
+  publisher = "University of Joensuu",
+  year = "2010",
+  issn = "1404-3203",
+  title = "TRAKLA2",
+  booktitle = "Proceedings of the 9th Koli Calling International Conference on Computing Education Research",
+  url = "http://www.it.uu.se/research/publications/reports/2010-027/2010-027.pdf"
+}
+@inproceedings{Ihantola:AASurvey,
+ author = {Petri Ihantola and Tuukka Ahoniemi and Ville Karavirta and Otto Sepp\"{a}l\"{a}},
+ title = {Review of recent systems for automatic assessment of programming assignments},
+ booktitle = {Proceedings of the 10th Koli Calling International Conference on Computing Education Research},
+ series = {Koli Calling '10},
+ year = {2010},
+ isbn = {978-1-4503-0520-4},
+ location = {Berlin, Germany},
+ pages = {86--93},
+ numpages = {8},
+ url = {http://dl.acm.org/authorize?452133},
+ doi = {http://doi.acm.org/10.1145/1930464.1930480},
+ acmid = {1930480},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+}
 
-          @InProceedings{Ahoniemi:Analyzing,
-            author = {Tuukka Ahoniemi and Ville Karavirta},
-            title = {Analyzing the use of a rubric-based grading tool},
-            keywords = {Grading, Rubrics, Programming, Assessment, Mass courses},
-            booktitle = {ITiCSE '09: Proceedings of the 14th annual ACM SIGCSE conference on Innovation and technology in computer science education},
-            year = {2009},
-            publisher = {ACM},
-            edition = {},
-            pages = {333--337},
-            url = {http://doi.acm.org/10.1145/1562877.1562977}
-          }
+@inproceedings{Karavirta:GMaps,
+  author = {Ville Karavirta},
+  title = {Real-World, Student Selectable Data for Education -- Learning graph Algorithms},
+  year = {2010},
+  booktitle = {Proceedings of the IADIS International Conference Cognition and Exploratory Learning in Digital Age},
+  pages = {129--136},
+  address = {Timisoara, Romania},
+  month = {October},
+url = {http://www.iadisportal.org/digital-library/real-world-student-selectable-data-for-education-learning-graph-algorithms}
+}
 
-          @InProceedings{Auvinen:RubyricPoster,
-            author = {Tapio Auvinen and Ville Karavirta and Tuukka Ahoniemi},
-            title = {Rubyric: an online assessment tool for effortless authoring of personalized feedback},
-            keywords = {Rubrics, Assessment, Feedback, Large Courses, Rubyric},
-            booktitle = {ITiCSE '09: Proceedings of the 14th annual ACM SIGCSE conference on Innovation and technology in computer science education},
-            year = {2009},
-            publisher = {ACM},
-            edition = {},
-            pages = {377},
-            url = {http://doi.acm.org/10.1145/1562877.1563019}
-          }
+@InProceedings{Karavirta:JSAssess,
+  author = {Ville Karavirta and Petri Ihantola},
+  title = {Automatic Assessment of JavaScript Exercises},
+  keywords = {automatic assessment
+javascript},
+  booktitle = {Proceedings of 1st Educators' Day on Web Engineering Curricula (WECU 2010)},
+  year = {2010},
+  publisher = {CEUR-WS.org},
+  OPTeditor = {},
+  edition = {},
+  address = {Vienna, Austria, July 6, 2010},
+  OPTvolume = {},
+  OPTnumber = {},
+  pages = {1-10},
+  OPTmonth = {},
+  OPTnote = {},
+  url = {http://ceur-ws.org/Vol-607/paper9.pdf}
+}
 
-          @Article{Karavirta:Merging,
-            author = {Ville Karavirta},
-            title = {Seamless Merging of Hypertext and Algorithm Animation},
-            journal = {ACM Transactions on Computing Education (TOCE)},
-            year = {2009},
-            publisher = {ACM},
-            address = {New York, NY, USA},
-            edition = {},
-            volume = {9},
-            number = {2},
-            pages = {1--18},
-            url = {http://doi.acm.org/10.1145/1538234.1538237}
-          }
+@article{Karavirta:JVLCTaxonomy,
+title = {A comprehensive taxonomy of algorithm animation languages},
+journal = {Journal of Visual Languages \&amp; Computing},
+volume = {20},
+number = {1},
+pages = {1--22},
+year = {2010},
+issn = {1045-926X},
+doi = {DOI: 10.1016/j.jvlc.2009.09.001},
+url = {http://www.sciencedirect.com/science/article/B6WMM-4XBR4NN-1/2/32dd4b4e05e9eca125e9600b9fc235f7},
+author = {Ville Karavirta and Ari Korhonen and Lauri Malmi and Thomas Naps}
+}
 
-          @PhdThesis{Karavirta:Doctoral,
-            author =	 {Ville Karavirta},
-            title =	 {Facilitating Algorithm Visualization Creation and Adoption in Education},
-            organization = {Department of Computer Science and Engineering}, 
-            school =	 {Helsinki University of Technology},
-            year =	 {2009},
-            type =	 {Doctoral Dissertation (Research Rep. No. TKK-CSE-A3/09)},
-            url = {http://lib.tkk.fi/Diss/2009/isbn9789522481702/isbn9789522481702.pdf}
-          }
+@InProceedings{Ahoniemi:Analyzing,
+  author = {Tuukka Ahoniemi and Ville Karavirta},
+  title = {Analyzing the use of a rubric-based grading tool},
+  keywords = {Grading, Rubrics, Programming, Assessment, Mass courses},
+  booktitle = {ITiCSE '09: Proceedings of the 14th annual ACM SIGCSE conference on Innovation and technology in computer science education},
+  year = {2009},
+  publisher = {ACM},
+  edition = {},
+  pages = {333--337},
+  url = {http://dl.acm.org/authorize?115694}
+}
 
-          @TechReport{Karavirta:XaalSlides,
-            author = {Ville Karavirta and Guido R\"o\ss{}ling and Otto Sepp\"{a}l\"{a}},
-            title = {Automatic Generation of Algorithm Visualizations for Lectures},
-            year = {2009},
-            institution = {Helsinki University of Technology, Department of Computer Science and Engineering},
-            url = {http://www.cse.tkk.fi/en/publications/B/7/cse-b7.pdf},
-            edition = {},
-            type = {Technical Report},
-            number = {TKK-CSE-B7},
-            pages = {11},
-          }
+@InProceedings{Auvinen:RubyricPoster,
+  author = {Tapio Auvinen and Ville Karavirta and Tuukka Ahoniemi},
+  title = {Rubyric: an online assessment tool for effortless authoring of personalized feedback},
+  keywords = {Rubrics, Assessment, Feedback, Large Courses, Rubyric},
+  booktitle = {ITiCSE '09: Proceedings of the 14th annual ACM SIGCSE conference on Innovation and technology in computer science education},
+  year = {2009},
+  publisher = {ACM},
+  edition = {},
+  pages = {377},
+  url = {http://dl.acm.org/authorize?115634}
+}
 
-          @inproceedings{Seppala:AASlides,
-           author = {Otto Sepp\"{a}l\"{a} and Ville Karavirta},
-           title = {Work in Progress: Automatic Generation of Algorithm Animations for Lecture Slides},
-           booktitle = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008) in Electronic Notes in Theoretical Computer Science, 224},
-           year = {2009},
-           issn = {1571-0661},
-           pages = {97--103},
-           url = {http://dx.doi.org/10.1016/j.entcs.2008.12.053},
-           publisher = {Elsevier Science Publishers B. V.},
-           address = {Amsterdam, The Netherlands, The Netherlands}
-          }
+@Article{Karavirta:Merging,
+  author = {Ville Karavirta},
+  title = {Seamless Merging of Hypertext and Algorithm Animation},
+  journal = {ACM Transactions on Computing Education (TOCE)},
+  year = {2009},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  edition = {},
+  volume = {9},
+  number = {2},
+  pages = {1--18},
+  url = {http://dl.acm.org/authorize?172837}
+}
 
-          @inproceedings{Karavirta:TowardsMerging,
-          title = {Towards Seamless Merging of Hypertext and Algorithm Animation},
-          booktitle = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008) in Electronic Notes in Theoretical Computer Science, 224},
-          pages = {105--114},
-          year = {2009},
-          note = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008)},
-          issn = {1571-0661},
-          doi = {DOI: 10.1016/j.entcs.2008.12.054},
-          url = {http://dx.doi.org/10.1016/j.entcs.2008.12.054},
-          author = {Ville Karavirta},
-          keywords = {Algorithm animation},
-          keywords = {online learning},
-          keywords = {merging of hypertext and algorithm animation},
-          keywords = {Xaal}
-          }
+@PhdThesis{Karavirta:Doctoral,
+  author =   {Ville Karavirta},
+  title =  {Facilitating Algorithm Visualization Creation and Adoption in Education},
+  organization = {Department of Computer Science and Engineering},
+  school =   {Helsinki University of Technology},
+  year =   {2009},
+  type =   {Doctoral Dissertation (Research Rep. No. TKK-CSE-A3/09)},
+  url = {http://lib.tkk.fi/Diss/2009/isbn9789522481702/isbn9789522481702.pdf}
+}
 
-          @Article{Karavirta:TktXaal,
-            author = {Ville Karavirta},
-            title = {Mit\"a saavutettaisiin  algoritmianimaatiokielistandardilla?},
-            journal = {Tietojenk\"asittelytiede},
-            keywords = {algorithm animation, xaal, algorithm animation language},
-            year = {2008},
-            publisher = {},
-            edition = {},
-            volume = {0},
-            number = {28},
-            pages = {15--30},
-            url = {}
-          }
-          @article{Sorva:RolesInTeaching,
-             author = {Juha Sorva and Ville Karavirta and Ari Korhonen},
-              title = {Roles of Variables in Teaching},
-            journal = {Journal of Information Technology Education},
-             volume = {6},
-               year = {2007},
-              pages = {407--423},
-                url = {http://jite.org/documents/Vol6/JITEv6p407-423Sorva280.pdf}
-          }
+@TechReport{Karavirta:XaalSlides,
+  author = {Ville Karavirta and Guido R\"o\ss{}ling and Otto Sepp\"{a}l\"{a}},
+  title = {Automatic Generation of Algorithm Visualizations for Lectures},
+  year = {2009},
+  institution = {Helsinki University of Technology, Department of Computer Science and Engineering},
+  url = {http://www.cse.tkk.fi/en/publications/B/7/cse-b7.pdf},
+  edition = {},
+  type = {Technical Report},
+  number = {TKK-CSE-B7},
+  pages = {11},
+}
 
-          @InProceedings{Karavirta:integration,
-            author = 	 {Ville Karavirta},
-            title = 	 {Integrating Algorithm Animation Systems},
-            booktitle = {Proceedings of the Fourth Program Visualization Workshop (PVW 2006)},
-            pages = 	 {79--87},
-            year = 	 {2007},
-            volume = 	 {178},
-            series = 	 {Electronic Notes in Theoretical Computer Science },
-            month = 	 {4 July 2007}
-          }
+@inproceedings{Seppala:AASlides,
+ author = {Otto Sepp\"{a}l\"{a} and Ville Karavirta},
+ title = {Work in Progress: Automatic Generation of Algorithm Animations for Lecture Slides},
+ booktitle = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008) in Electronic Notes in Theoretical Computer Science, 224},
+ year = {2009},
+ issn = {1571-0661},
+ pages = {97--103},
+ url = {http://dx.doi.org/10.1016/j.entcs.2008.12.053},
+ publisher = {Elsevier Science Publishers B. V.},
+ address = {Amsterdam, The Netherlands, The Netherlands}
+}
 
-          @InProceedings{Karavirta:hecse2007,
-            author = {Ville Karavirta},
-            title = {Algorithm Visualizations as Interactive Learning Material},
-            keywords = {algorithm visualization, algorithm animation, learning, interaction},
-            booktitle = {},
-            year = {2007},
-            publisher = {},
-            edition = {},
-            address = {Annual Hecse Poster Session, Helsinki, Finland, May 28 - June 1, 2007},
-            pages = {95},
-            url = {}
-          }
+@inproceedings{Karavirta:TowardsMerging,
+title = {Towards Seamless Merging of Hypertext and Algorithm Animation},
+booktitle = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008) in Electronic Notes in Theoretical Computer Science, 224},
+pages = {105--114},
+year = {2009},
+note = {Proceedings of the Fifth Program Visualization Workshop (PVW 2008)},
+issn = {1571-0661},
+doi = {DOI: 10.1016/j.entcs.2008.12.054},
+url = {http://dx.doi.org/10.1016/j.entcs.2008.12.054},
+author = {Ville Karavirta},
+keywords = {Algorithm animation},
+keywords = {online learning},
+keywords = {merging of hypertext and algorithm animation},
+keywords = {Xaal}
+}
 
-          @MastersThesis{Karavirta:Licentiates,
-            author = 	 {Ville Karavirta},
-            title = {Facilitating Algorithm Animation Creation and Adoption in Education},
-            type = {Licentiate's Thesis}, 
-            organization = {Department of Computer Science and Engineering}, 
-            school = {Helsinki University of Technology},
-            year = {2007}, 
-            month = 	 {December},
-            url = {http://www.cs.hut.fi/Research/SVG/publications/karavirta-lis.pdf}  
-          }
+@Article{Karavirta:TktXaal,
+  author = {Ville Karavirta},
+  title = {Mit\"a saavutettaisiin  algoritmianimaatiokielistandardilla?},
+  journal = {Tietojenk\"asittelytiede},
+  keywords = {algorithm animation, xaal, algorithm animation language},
+  year = {2008},
+  publisher = {},
+  edition = {},
+  volume = {0},
+  number = {28},
+  pages = {15--30},
+  url = {http://www.cse.tkk.fi/fi/tkt-lehti/a28/karavirta.pdf}
+}
+@article{Sorva:RolesInTeaching,
+   author = {Juha Sorva and Ville Karavirta and Ari Korhonen},
+    title = {Roles of Variables in Teaching},
+  journal = {Journal of Information Technology Education},
+   volume = {6},
+     year = {2007},
+    pages = {407--423},
+      url = {http://jite.org/documents/Vol6/JITEv6p407-423Sorva280.pdf}
+}
 
-          @InProceedings{Karavirta:tktpxaal,
-            author = {Ville Karavirta},
-            title = {XAAL - Extensible Algorithm Animation Language},
-            keywords = {algorithm visualization, algorithm animation, algorithm animation language, xaal},
-            booktitle = {Tietojenk\"{a}sittelytieteen p\"{a}iv\"{a}t},
-            year = {2007},
-            publisher = {Jyv\"{a}skyl\"{a}n Yliopisto, Tietojenk\"{a}sittelytieteiden laitos},
-            editor = {Minna Koskinen, Eliisa Jauhiainen},
-            edition = {},
-            address = {Jyv\"{a}skyl\"{a}, 31.5. - 1.6.2007},
-            pages = {20--25},
-            url = {}
-          }
-          @InProceedings{Karavirta:AALTaxonomy,
-            author = 	 {Ville Karavirta and Ari Korhonen and Lauri Malmi},
-            title = 	 {Taxonomy of Algorithm Animation Languages},
-            booktitle = {SoftVis '06: Proceedings of the 2006 ACM symposium on Software visualization},
-            isbn = {1-59593-464-2},
-            pages = {77--85},
-            location = {Brighton, United Kingdom},
-            publisher = {ACM Press},
-            address = {New York, NY, USA},
-            year = 	 {2006},
-            month = 	 {September},
-            url = {http://doi.acm.org/10.1145/1148493.1148505}
-          }
+@InProceedings{Karavirta:integration,
+  author =   {Ville Karavirta},
+  title =    {Integrating Algorithm Visualization Systems},
+  booktitle = {Proceedings of the Fourth Program Visualization Workshop (PVW 2006)},
+  pages =    {79--87},
+  year =   {2007},
+  volume =   {178},
+  series =   {Electronic Notes in Theoretical Computer Science },
+  month =    {4 July 2007},
+ url = {http://dx.doi.org/10.1016/j.entcs.2007.01.030}
+}
 
-          @InProceedings{Karavirta:tktp,
-            author = 	 {Ville Karavirta},
-            title = 	 {Algoritmianimaatioj\"{a}rjestelmien tiedonvaihto},
-            booktitle = {Tietojenk\"{a}sittelytieteen p\"{a}iv\"{a}t 2006},
-            pages = 	 {25--30},
-            year = 	 {2006},
-            editor = 	 {Lea Kutvonen and P\"{a}ivi Kuuppelom\"{a}ki},
-            address = 	 {Helsinki, Finland},
-            organization = {Helsingin Yliopisto, Tietojenk\"{a}sittelytieteen laitos}
-          }
+@InProceedings{Karavirta:hecse2007,
+  author = {Ville Karavirta},
+  title = {Algorithm Visualizations as Interactive Learning Material},
+  keywords = {algorithm visualization, algorithm animation, learning, interaction},
+  booktitle = {},
+  year = {2007},
+  publisher = {},
+  edition = {},
+  address = {Annual Hecse Poster Session, Helsinki, Finland, May 28 - June 1, 2007},
+  pages = {95},
+  url = {}
+}
 
-          @article{Roessling:VizCoSH,
-           author = {Guido R\"o\ss{}ling and Thomas Naps and Mark S. Hall and Ville Karavirta and Andreas Kerren and Charles Leska and Andr\'es Moreno and Rainer Oechsle and Susan H. Rodger and Jaime Urquiza-Fuentes and J. \'Angel Vel\'azquez-Iturbide},
-           title = {Merging interactive visualizations with hypertextbooks and course management},
-           journal = {SIGCSE Bulletin},
-           volume = {38},
-           number = {4},
-           year = {2006},
-           issn = {0097-8418},
-           pages = {166--181},
-           url = {http://doi.acm.org/10.1145/1189136.1189184},
-           publisher = {ACM Press},
-           address = {New York, NY, USA}
-           }
+@MastersThesis{Karavirta:Licentiates,
+  author =   {Ville Karavirta},
+  title = {Facilitating Algorithm Animation Creation and Adoption in Education},
+  type = {Licentiate's Thesis},
+  organization = {Department of Computer Science and Engineering},
+  school = {Helsinki University of Technology},
+  year = {2007},
+  month =    {December},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/karavirta-lis.pdf}
+}
 
-          @InProceedings{Karavirta:VirtualTutor,
-            author = 	 {Ville Karavirta and Ari Korhonen},
-            title = 	 {Automatic Tutoring Question Generation During Algorithm Simulation},
-            booktitle =	 {Proceedings of the 6th Finnish/Baltic Sea
-                            Conference on Computer Science Education, Koli Calling},
-            year =	 {2006},
-            pages = 	 {95--100},
-            editor = 	 {Anders Berglund and Mattias Wiggberg}
-          }
+@InProceedings{Karavirta:tktpxaal,
+  author = {Ville Karavirta},
+  title = {XAAL - Extensible Algorithm Animation Language},
+  keywords = {algorithm visualization, algorithm animation, algorithm animation language, xaal},
+  booktitle = {Tietojenk\"{a}sittelytieteen p\"{a}iv\"{a}t},
+  year = {2007},
+  publisher = {Jyv\"{a}skyl\"{a}n Yliopisto, Tietojenk\"{a}sittelytieteiden laitos},
+  editor = {Minna Koskinen, Eliisa Jauhiainen},
+  edition = {},
+  address = {Jyv\"{a}skyl\"{a}, 31.5. - 1.6.2007},
+  pages = {20--25},
+  url = {}
+}
+@InProceedings{Karavirta:AALTaxonomy,
+  author =   {Ville Karavirta and Ari Korhonen and Lauri Malmi},
+  title =    {Taxonomy of Algorithm Animation Languages},
+  booktitle = {SoftVis '06: Proceedings of the 2006 ACM symposium on Software visualization},
+  isbn = {1-59593-464-2},
+  pages = {77--85},
+  location = {Brighton, United Kingdom},
+  publisher = {ACM Press},
+  address = {New York, NY, USA},
+  year =   {2006},
+  month =    {September},
+  url = {http://dl.acm.org/authorize?813987}
+}
 
-          @Article{Karavirta:Resubmissions,
-            author = {Ville Karavirta and Ari Korhonen and Lauri Malmi},
-            title = {On the use of resubmissions in automatic assessment systems},
-            journal = {Computer Science Education},
-            year = {2006},
-            publisher = {Routledge},
-            volume = {16},
-            number = {3},
-            pages = {229--240},
-            month = {September},
-            url = {http://journalsonline.tandf.co.uk/link.asp?id=R77P7107U31V846J}
-          }
+@InProceedings{Karavirta:tktp,
+  author =   {Ville Karavirta},
+  title =    {Algoritmianimaatioj\"{a}rjestelmien tiedonvaihto},
+  booktitle = {Tietojenk\"{a}sittelytieteen p\"{a}iv\"{a}t 2006},
+  pages =    {25--30},
+  year =   {2006},
+  editor =   {Lea Kutvonen and P\"{a}ivi Kuuppelom\"{a}ki},
+  address =    {Helsinki, Finland},
+  organization = {Helsingin Yliopisto, Tietojenk\"{a}sittelytieteen laitos}
+}
 
-          @article{Naps:XMLWG,
-           author = {Thomas Naps and Guido R\"o\ss{}ling and Peter Brusilovsky and John English and Duane Jarc and Ville Karavirta and Charles Leska and Myles McNally and Andr\'es Moreno and Rockford J. Ross and Jaime Urquiza-Fuentes},
-           title = {Development of XML-based Tools to Support User Interaction with Algorithm Visualization},
-           journal = {SIGCSE Bulletin},
-           volume = {37},
-           number = {4},
-           year = {2005},
-           month = {December},
-           pages = {123--138},
-           publisher = {ACM Press},
-           address = {New York, NY, USA},
-           }
+@article{Roessling:VizCoSH,
+ author = {Guido R\"o\ss{}ling and Thomas Naps and Mark S. Hall and Ville Karavirta and Andreas Kerren and Charles Leska and Andr\'es Moreno and Rainer Oechsle and Susan H. Rodger and Jaime Urquiza-Fuentes and J. \'Angel Vel\'azquez-Iturbide},
+ title = {Merging interactive visualizations with hypertextbooks and course management},
+ journal = {SIGCSE Bulletin},
+ volume = {38},
+ number = {4},
+ year = {2006},
+ issn = {0097-8418},
+ pages = {166--181},
+ url = {http://dl.acm.org/authorize?848346},
+ publisher = {ACM Press},
+ address = {New York, NY, USA}
+ }
 
-          @inproceedings{Korhonen:ICER,
-            author = {Petri Ihantola and Ville Karavirta and Ari Korhonen and Jussi Nikander},
-            title = {Taxonomy of effortless creation of algorithm visualizations},
-            booktitle = {ICER'05: Proceedings of the 2005 international workshop on Computing education research},
-            year = {2005},
-            isbn = {1-59593-043-4},
-            pages = {123--133},
-            location = {Seattle, WA, USA},
-            url = {http://doi.acm.org/10.1145/1089786.1089798},
-            publisher = {ACM Press},
-            address = {New York, NY, USA}
-          }
+@InProceedings{Karavirta:VirtualTutor,
+  author =   {Ville Karavirta and Ari Korhonen},
+  title =    {Automatic Tutoring Question Generation During Algorithm Simulation},
+  booktitle =  {Proceedings of the 6th Finnish/Baltic Sea
+                  Conference on Computer Science Education, Koli Calling},
+  year =   {2006},
+  pages =    {95--100},
+  editor =   {Anders Berglund and Mattias Wiggberg},
+ url = {http://dl.acm.org/authorize?921222}
+}
 
-          @Article{Malmi:JERIC,
-            author = 	 {Lauri Malmi and Ville Karavirta and Ari Korhonen and Jussi Nikander},
-            title = 	 {Experiences on Automatically Assessed Algorithm Simulation Exercises with Different Resubmission Policies},
-            journal = 	 {Journal of Educational Resources in Computing},
-            year = 	 {2005},
-            volume = 	 {5},
-            number = 	 {3},
-            pages = 	 {1--23},
-            month = 	 {September},
-            publisher = {ACM Press},
-            address = {New York, NY, USA}
-          }
+@Article{Karavirta:Resubmissions,
+  author = {Ville Karavirta and Ari Korhonen and Lauri Malmi},
+  title = {On the use of resubmissions in automatic assessment systems},
+  journal = {Computer Science Education},
+  year = {2006},
+  publisher = {Routledge},
+  volume = {16},
+  number = {3},
+  pages = {229--240},
+  month = {September},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/cse-clustering06.pdf}
+}
 
-          @InProceedings{Karavirta:clustering,
-            author = 	 {Ville Karavirta and Ari Korhonen and Lauri Malmi},
-            title = 	 {Different Learners Need Different Resubmission Policies in Automatic Assessment Systems},
-            booktitle = {Proceedings of the 5th Annual Finnish / Baltic Sea Conference on Computer Science Education},
-            pages = 	 {95--102},
-            year = 	 {2005},
-            month = 	 {November},
-            organization = {University of Joensuu}
-          }
+@article{Naps:XMLWG,
+ author = {Thomas Naps and Guido R\"o\ss{}ling and Peter Brusilovsky and John English and Duane Jarc and Ville Karavirta and Charles Leska and Myles McNally and Andr\'es Moreno and Rockford J. Ross and Jaime Urquiza-Fuentes},
+ title = {Development of XML-based Tools to Support User Interaction with Algorithm Visualization},
+ journal = {SIGCSE Bulletin},
+ volume = {37},
+ number = {4},
+ year = {2005},
+ month = {December},
+ pages = {123--138},
+ publisher = {ACM Press},
+ address = {New York, NY, USA},
+ url = {http://dl.acm.org/authorize?899739}
+ }
 
-          @MastersThesis{Karavirta:Masters,
-            author = 	 {Ville Karavirta},
-            title = 	 {{XAAL} - Extensible Algorithm Animation Language},
-            organization = {Department of Computer Science and Engineering}, 
-            school = 	 {Department of Computer Science and Engineering, Helsinki University of Technology},
-            year = 	 {2005},
-            type = 	 {Master's Thesis},
-            month = 	 {December},
-            url = {http://www.cs.hut.fi/Research/SVG/publications/karavirta-masters.pdf}
-          }
+@inproceedings{Korhonen:ICER,
+  author = {Petri Ihantola and Ville Karavirta and Ari Korhonen and Jussi Nikander},
+  title = {Taxonomy of effortless creation of algorithm visualizations},
+  booktitle = {ICER'05: Proceedings of the 2005 international workshop on Computing education research},
+  year = {2005},
+  isbn = {1-59593-043-4},
+  pages = {123--133},
+  location = {Seattle, WA, USA},
+  url = {http://dl.acm.org/authorize?878414},
+  publisher = {ACM Press},
+  address = {New York, NY, USA}
+}
 
-          @InProceedings{Seppala:MatrixPro,
-            author = 	 {Otto Sepp\"al\"a and Ville Karavirta and Ari Korhonen},
-            title = 	 {MatrixPro - Luentoty\"okalu tietorakenteiden ja algoritmien opetukseen},
-            booktitle = {Reflektori 2005 tekniikan opetuksen symposium, 20. - 21.10.2005, Espoo},
-            pages = 	 {1--5},
-            year = 	 {2005},
-            editor = 	 {Anu Yanar},
-            publisher = {Opetuksen ja Opiskelun tuki, Teknillinen korkeakoulu, Espoo}
-          }
+@Article{Malmi:JERIC,
+  author =   {Lauri Malmi and Ville Karavirta and Ari Korhonen and Jussi Nikander},
+  title =    {Experiences on Automatically Assessed Algorithm Simulation Exercises with Different Resubmission Policies},
+  journal =    {Journal of Educational Resources in Computing},
+  year =   {2005},
+  volume =   {5},
+  number =   {3},
+  pages =    {1--23},
+  month =    {September},
+  publisher = {ACM Press},
+  address = {New York, NY, USA},
+  url = {http://dl.acm.org/authorize?829352}
+}
 
-          @InProceedings{Karavirta:MatrixPro,
-            author = 	 {Ville Karavirta and Ari Korhonen and Lauri Malmi and Kimmo St\aa{}lnacke},
-            title = 	 {{MatrixPro} - {A} Tool for On-The-Fly Demonstration of Data Structures and Algorithms},
-            booktitle = {Proceedings of the Third Program Visualization Workshop},
-            pages = 	 {26--33},
-            year = 	 {2004},
-            address = 	 {The University of Warwick, UK},
-            month = 	 {July},
-            url = {http://www.cs.hut.fi/Research/SVG/publications/p04.pdf}
-          }
+@InProceedings{Karavirta:clustering,
+  author =   {Ville Karavirta and Ari Korhonen and Lauri Malmi},
+  title =    {Different Learners Need Different Resubmission Policies in Automatic Assessment Systems},
+  booktitle = {Proceedings of the 5th Annual Finnish / Baltic Sea Conference on Computer Science Education},
+  pages =    {95--102},
+  year =   {2005},
+  month =    {November},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/clustering.pdf},
+  organization = {University of Joensuu}
+}
 
-          @InProceedings{Karavirta:MPPoster,
-            author = 	 {Ville Karavirta and Ari Korhonen and Lauri Malmi and Kimmo St\aa{}lnacke},
-            title = 	 {Matrix{P}ro - A Tool for Demonstrating Data Structures and Algorithms Ex Tempore},
-            booktitle = {Proceedings of the 4th IEEE International Conference on Advanced Learning Technologies},
-            pages = 	 {892--893},
-            year = 	 {2004},
-            address = 	 {Joensuu, Finland}
-          }
+@MastersThesis{Karavirta:Masters,
+  author =   {Ville Karavirta},
+  title =    {{XAAL} - Extensible Algorithm Animation Language},
+  organization = {Department of Computer Science and Engineering},
+  school =   {Department of Computer Science and Engineering, Helsinki University of Technology},
+  year =   {2005},
+  type =   {Master's Thesis},
+  month =    {December},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/karavirta-masters.pdf}
+}
 
-          @InProceedings{Karavirta:survey,
-            author = 	 {Ville Karavirta and Ari Korhonen and Petri Tenhunen},
-            title = 	 {Survey of Effortlessness in Algorithm Visualization Systems},
-            booktitle = {Proceedings of the Third Program Visualization Workshop},
-            pages = 	 {141--148},
-            year = 	 {2004},
-            address = 	 {The University of Warwick, UK},
-            month = 	 {July},
-            url = {http://www.cs.hut.fi/Research/SVG/publications/p20.pdf}
-          }
+@InProceedings{Seppala:MatrixPro,
+  author =   {Otto Sepp\"al\"a and Ville Karavirta and Ari Korhonen},
+  title =    {MatrixPro - Luentoty\"okalu tietorakenteiden ja algoritmien opetukseen},
+  booktitle = {Reflektori 2005 tekniikan opetuksen symposium, 20. - 21.10.2005, Espoo},
+  pages =    {1--5},
+  year =   {2005},
+  editor =   {Anu Yanar},
+  publisher = {Opetuksen ja Opiskelun tuki, Teknillinen korkeakoulu, Espoo},
+  url = {http://opetuki2.tkk.fi/p/reflektori/verkkojulkaisu/pdf/f7_otto_seppala.pdf}
+}
 
-          @TechReport{Korhonen:MatrixFramework,
-            author =	 {Ari Korhonen and Lauri Malmi and Panu Silvasti and Ville Karavirta and Jan L\"{o}nnberg and Jussi Nikander and Kimmo St\aa{}lnacke and Petri Ihantola},
-            title =	 {Matrix - A Framework for Interactive Software Visualization},
-            institution =	 {Laboratory of Information Processing Science, Department of
-                            Computer Science and Engineering, Helsinki University of
-                            Technology},
-            year =	 2004,
-            type =	 {Research Report},
-            number =	 {TKO-B 154/04},
-            address =	 {Finland}, 
-            url = {http://www.cs.hut.fi/Research/SVG/publications/B154.pdf}
-          }
+@InProceedings{Karavirta:MatrixPro,
+  author =   {Ville Karavirta and Ari Korhonen and Lauri Malmi and Kimmo St\aa{}lnacke},
+  title =    {{MatrixPro} - {A} Tool for On-The-Fly Demonstration of Data Structures and Algorithms},
+  booktitle = {Proceedings of the Third Program Visualization Workshop},
+  pages =    {26--33},
+  year =   {2004},
+  address =    {The University of Warwick, UK},
+  month =    {July},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/p04.pdf}
+}
 
-          @Article{Malmi:TRAKLA2,
-            author = 	 {Lauri Malmi and Ville Karavirta and Ari Korhonen and Jussi Nikander and Otto Sepp\"{a}l\"{a} and Panu Silvasti},
-            title = 	 {Visual Algorithm Simulation Exercise System with Automatic Assessment: {TRAKLA2}},
-            journal = 	 {Informatics in Education},
-            year = 	 {2004},
-            volume = 	 {3},
-            number = 	 {2},
-            pages = 	 {267--288},
-            url = {http://www.cs.hut.fi/Research/SVG/publications/infoinedu.pdf}
-          }
+@InProceedings{Karavirta:MPPoster,
+  author =   {Ville Karavirta and Ari Korhonen and Lauri Malmi and Kimmo St\aa{}lnacke},
+  title =    {Matrix{P}ro - A Tool for Demonstrating Data Structures and Algorithms Ex Tempore},
+  booktitle = {Proceedings of the 4th IEEE International Conference on Advanced Learning Technologies},
+  pages =    {892--893},
+  year =   {2004},
+  address =    {Joensuu, Finland},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/icalt04-matrixpro.pdf}
+}
 
-          @misc{Korhonen:TRAKLA2-URL,
-            author = {Ari Korhonen and Lauri Malmi and Panu Silvasti and Jussi Nikander and Petri Tenhunen and Pekka M\aa{}rd and Harri Salonen and Ville Karavirta},
-            title = {{TRAKLA2}},
-            year = {2003},
-            howpublished = {Computer program},
-            url = {http://www.cs.hut.fi/Research/TRAKLA2/}
-          }
+@InProceedings{Karavirta:survey,
+  author =   {Ville Karavirta and Ari Korhonen and Petri Tenhunen},
+  title =    {Survey of Effortlessness in Algorithm Visualization Systems},
+  booktitle = {Proceedings of the Third Program Visualization Workshop},
+  pages =    {141--148},
+  year =   {2004},
+  address =    {The University of Warwick, UK},
+  month =    {July},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/p20.pdf}
+}
 
-          @misc{Karavirta:MatrixProProgram,
-            author = {Ville Karavirta and Ari Korhonen and Lauri Malmi},
-            title = {{MatrixPro}},
-            howpublished = {Computer program},
-            publisher = {Helsinki University of Technology},
-            month = {November},
-            year = {2003}, 
-            url = {http://www.cs.hut.fi/Research/MatrixPro/}  
-          }
+@TechReport{Korhonen:MatrixFramework,
+  author =   {Ari Korhonen and Lauri Malmi and Panu Silvasti and Ville Karavirta and Jan L\"{o}nnberg and Jussi Nikander and Kimmo St\aa{}lnacke and Petri Ihantola},
+  title =  {Matrix - A Framework for Interactive Software Visualization},
+  institution =  {Laboratory of Information Processing Science, Department of
+                  Computer Science and Engineering, Helsinki University of
+                  Technology},
+  year =   2004,
+  type =   {Research Report},
+  number =   {TKO-B 154/04},
+  address =  {Finland},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/B154.pdf}
+}
 
-          @inproceedings{Karavirta:effortless,
-           author = {Ville Karavirta and Ari Korhonen and Jussi Nikander and Petri Tenhunen},
-           title = {Effortless Creation of Algorithm Visualization},
-           booktitle = {Proceedings of the Second Annual Finnish / Baltic Sea Conference on Computer Science Education},
-           year = {2002},
-           pages = {52--56},
-           month = {October}, 
-           url = {http://www.cs.hut.fi/Research/SVG/publications/koli02P08.pdf}
-          }
+@Article{Malmi:TRAKLA2,
+  author =   {Lauri Malmi and Ville Karavirta and Ari Korhonen and Jussi Nikander and Otto Sepp\"{a}l\"{a} and Panu Silvasti},
+  title =    {Visual Algorithm Simulation Exercise System with Automatic Assessment: {TRAKLA2}},
+  journal =    {Informatics in Education},
+  year =   {2004},
+  volume =   {3},
+  number =   {2},
+  pages =    {267--288},
+  url = {http://www.cs.hut.fi/Research/SVG/publications/infoinedu.pdf}
+}
+
+@misc{Korhonen:TRAKLA2-URL,
+  author = {Ari Korhonen and Lauri Malmi and Panu Silvasti and Jussi Nikander and Petri Tenhunen and Pekka M\aa{}rd and Harri Salonen and Ville Karavirta},
+  title = {{TRAKLA2}},
+  year = {2003},
+  howpublished = {Computer program},
+  url = {http://www.cs.hut.fi/Research/TRAKLA2/}
+}
+
+@misc{Karavirta:MatrixProProgram,
+  author = {Ville Karavirta and Ari Korhonen and Lauri Malmi},
+  title = {{MatrixPro}},
+  howpublished = {Computer program},
+  publisher = {Helsinki University of Technology},
+  month = {November},
+  year = {2003},
+  url = {http://www.cs.hut.fi/Research/MatrixPro/}
+}
+
+@inproceedings{Karavirta:effortless,
+ author = {Ville Karavirta and Ari Korhonen and Jussi Nikander and Petri Tenhunen},
+ title = {Effortless Creation of Algorithm Visualization},
+ booktitle = {Proceedings of the Second Annual Finnish / Baltic Sea Conference on Computer Science Education},
+ year = {2002},
+ pages = {52--56},
+ month = {October},
+ url = {http://www.cs.hut.fi/Research/SVG/publications/koli02P08.pdf}
+}
 </pre>
-  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="build/bib-list-min.js"></script>
+  	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+		<script type="text/javascript" src="build/bib-list.js"></script>
 		<script type="text/javascript">
 		    $(document).ready(function() {
-        		bibtexify("#bibtex", "pubTable", {'tweet': 'vkaravir'});
+        	bibtexify("#bibtex", "pubTable", {'tweet': 'vkaravir'});
     		});
 		</script>
 	</body>

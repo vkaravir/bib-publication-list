@@ -59,7 +59,7 @@ var bibtexify = (function($) {
             } else if (entryData.url) {
                 itemStr += ' (<a title="This article online" href="' + entryData.url +
                 '">link<\/a>)';
-            } 
+            }
             return itemStr;
         },
         bibtex: function(entryData) {
@@ -69,7 +69,7 @@ var bibtexify = (function($) {
             itemStr += '@' + entryData.entryType + "{" + entryData.cite + ",\n";
             $.each(entryData, function(key, value) {
                 if (key == 'author') {
-                    itemStr += '  author = { '
+                    itemStr += '  author = { ';
                     for (var index = 0; index < value.length; index++) {
                         if (index > 0) { itemStr += " and "; }
                         itemStr += value[index].last;
@@ -92,7 +92,7 @@ var bibtexify = (function($) {
           var splitName = function(wholeName) {
             var spl = wholeName.split(' ');
             return spl[spl.length-1];
-          }
+          };
           var auth = entryData.author;
           if (auth.length == 1) {
             itemStr += uriencode(splitName(auth[0].last));
@@ -106,38 +106,38 @@ var bibtexify = (function($) {
           return itemStr;
         },
         inproceedings: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
-                entryData.title + ". In <em>" + entryData.booktitle + 
-                ", pp. " + entryData.pages + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+                entryData.title + ". In <em>" + entryData.booktitle +
+                ", pp. " + entryData.pages +
                 ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
         },
         article: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.title + ". <em>" + entryData.journal + ", " + entryData.volume +
-                ((entryData.number)?"(" + entryData.number + ")":"")+ ", " + 
-                "pp. " + entryData.pages + ". " + 
+                ((entryData.number)?"(" + entryData.number + ")":"")+ ", " +
+                "pp. " + entryData.pages + ". " +
                 ((entryData.address)?entryData.address + ".":"") + "<\/em>";
         },
         misc: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
-                entryData.title + ". " + 
-                ((entryData.howpublished)?entryData.howpublished + ". ":"") + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+                entryData.title + ". " +
+                ((entryData.howpublished)?entryData.howpublished + ". ":"") +
                 ((entryData.note)?entryData.note + ".":"");
         },
         mastersthesis: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
             entryData.title + ". " + entryData.type + ". " +
             entryData.organization + ", " + entryData.school + ".";
         },
         techreport: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " + 
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.title + ". " + entryData.institution + ". " +
                 entryData.number + ". " + entryData.type + ".";
         },
         book: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 " <em>" + entryData.title + "<\/em>, " +
-                entryData.publisher + ", " + entryData.year + 
+                entryData.publisher + ", " + entryData.year +
                 ((entryData.issn)?", ISBN: " + entryData.issn + ".":".");
         },
         inbook: function(entryData) {
@@ -194,11 +194,11 @@ var bibtexify = (function($) {
         return itemStr.replace(/undefined/g, '<span class="undefined">undefined<\/span>');
     }
 
-    function addProtovis() {
+    function addBarChart() {
         var yearstats = [], max = 0;
         $.each(stats, function(key, value) {
             max = Math.max(max, value.count);
-            yearstats.push({'year': key, 'count': value.count, 
+            yearstats.push({'year': key, 'count': value.count,
                 'item': value, 'types': value.types});
         });
         yearstats.sort(function(a, b) {
@@ -210,48 +210,47 @@ var bibtexify = (function($) {
             } else if (a.year > b.year) {
               return 1;
             }
-            return 0; 
+            return 0;
         });
+        var pubHeight = $("#pubchart").height()/max - 2;
+        var styleStr = ".year { width: " + (100.0/yearstats.length) + "%; }" +
+                        ".pub { height: " + pubHeight + "px; }";
+        var legendTypes = [];
         var stats2html = function(item) {
             var types = [],
-                str = '<h3>' + item.year + ' (total ' + item.count + ')<\/h3>';
-            str += '<ul>';
+                str = '<div class="year">',
+                sum = 0;
             $.each(item.types, function(type, value) {
               types.push(type);
+              sum += value;
             });
             types.sort(function(x, y) {
               return bib2html.importance[y] - bib2html.importance[x];
             });
+            str += '<div class="filler" style="height:' + ((pubHeight+2)*(max-sum)) + 'px;"></div>';
             for (var i = 0; i < types.length; i++) {
-              var type = types[i];
-              str+='<li>'+bib2html.labels[type]+' '+item.types[type]+'<\/li>';
-            };
-            return str + '<\/ul>';
+                var type = types[i];
+                if (legendTypes.indexOf(type) === -1) {
+                    legendTypes.push(type);
+                }
+                for (var j = 0; j < item.types[type]; j++) {
+                    str += '<div class="pub ' + type + '"></div>';
+                }
+            }
+            return str + '<div class="yearlabel">' + item.year + '</div></div>';
         };
-        var w = 500, h = 100,
-            x = pv.Scale.ordinal(pv.range(yearstats.length)).splitBanded(0, w, 4.8/5),
-            y = pv.Scale.linear(0, max).range(0, h),
-            vis = new pv.Panel().width(w).height(h).bottom(20).
-                left(20).right(5).top(5);
-
-        vis.canvas("pubchart");
-        var bar = vis.add(pv.Bar).data(yearstats).
-            left(function() { return x(this.index); } ).
-            width(x.range().band).bottom(0).fillStyle("#eee").
-            event("mouseover", function(d) { $("#pubyeardetails").html(stats2html(d)).show();}).
-            height(function(d) { return d.count*h/max; });
-
-        bar.anchor("bottom").add(pv.Label).textStyle("black").
-            text(function(d) { return d.count.toFixed(0);});
-
-        bar.anchor("bottom").add(pv.Label).textMargin(5).
-            textBaseline("top").text(function(d) { return d.year;});
-
-        vis.add(pv.Rule).data(y.ticks()).
-            bottom(function(d) {return Math.round(y(d)) - 0.5;}).
-            strokeStyle(function(d) {return d ? "rgba(255,255,255,.4)" : "#000";});
-
-        vis.render();				
+        var statsHtml = "<style>" + styleStr + "</style>";
+        yearstats.forEach(function(item) {
+            statsHtml += stats2html(item);
+        });
+        var legendHtml = '<div class="legend">';
+        for (var i = 0, l = legendTypes.length; i < l; i++) {
+            var legend = legendTypes[i];
+            legendHtml += '<span class="pub ' + legend + '"></span>' + bib2html.labels[legend];
+        }
+        legendHtml += '</div>';
+        console.log(statsHtml);
+        $("#pubchart").html(statsHtml).after(legendHtml);
     }
     function updateStats(item) {
         if (!stats[item.year]) {
@@ -286,29 +285,28 @@ var bibtexify = (function($) {
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
             bibentries.push([item.year, bib2html.labels[item.entryType], entry2html(item)]);
-			      entryTypes[bib2html.labels[item.entryType]] = item.entryType;
+            entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             updateStats(item);
         }
         jQuery.fn.dataTableExt.oSort['type-sort-asc'] = function(x, y) {
-            var item1 = bib2html.importance[entryTypes[x]], 
+            var item1 = bib2html.importance[entryTypes[x]],
                 item2 = bib2html.importance[entryTypes[y]];
             return ((item1 < item2) ? -1 : ((item1 > item2) ?  1 : 0));
         };
         jQuery.fn.dataTableExt.oSort['type-sort-desc'] = function(x, y) {
-            var item1 = bib2html.importance[entryTypes[x]], 
+            var item1 = bib2html.importance[entryTypes[x]],
                 item2 = bib2html.importance[entryTypes[y]];
             return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
         };
-        var table = $pubTable.dataTable({ 'aaData': bibentries, 
-                              'aaSorting': options.sorting, 
+        var table = $pubTable.dataTable({ 'aaData': bibentries,
+                              'aaSorting': options.sorting,
                               'aoColumns': [ { "sTitle": "Year" },
                                              { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
                                              { "sTitle": "Publication", "bSortable": false }],
                               'bPaginate': false
                             });
-        // visualization does not work in IE, so leave it out
-        if (options.protovis && !$.browser.msie) {
-            addProtovis();
+        if (options.visualization || options.protovis) {
+            addBarChart();
         }
         $("th", $pubTable).unbind("click").click(function(e) {
           var $this = $(this),
@@ -335,9 +333,7 @@ var bibtexify = (function($) {
         $pubTable = $("#" + bibElemId);
         $pubTable.before('<div id="shutter" class="hidden"></div>');
         if (options.protovis) {
-            $pubTable.before('<div id="pubchart"></div>' + 
-                '<div id="pubyeardetails"></div>' +
-                '<div class="clear"></div>');
+            $pubTable.before('<div id="pubchart"></div>');
         }
         var $bibSrc = $(bibsrc);
         if ($bibSrc.length) {

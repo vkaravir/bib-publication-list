@@ -3,7 +3,7 @@ var fs = require('fs'),
   sys = require('sys');
 
 task('concat', [], function () {
-  var files = ('lib/BibTex-0.1.2.js lib/jquery.dataTables.min.js lib/protovis-r3.1.js '
+  var files = ('lib/BibTex-0.1.2.js lib/jquery.dataTables.min.js '
               + 'src/bib-publication-list.js').split(' '),
       filesLeft = files.length,
       pathName = '.',
