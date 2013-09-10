@@ -1,4 +1,4 @@
-bib-publication-list to automatically generate an interactive HTML publication list from a BibTeX file
+**bib-publication-list to automatically generate an interactive HTML publication list from a BibTeX file**
 
 ## Getting Started
 
@@ -57,17 +57,17 @@ The bibtexify function accepts an optional third parameter for configuration opt
 <tbody>
 <tr><td>visualization</td><td>A boolean to control addition of the visualization. Defaults to true.</td></tr>
 <tr><td>tweet</td><td>Twitter username to add Tweet links to bib items with a url field.</td></tr>
-<tr><td>sorting</td><td>Control the default sorting of the list. Defaults to `[[0, "desc"], [1, "desc"]]`. See http://datatables.net/api fnSort for details on formatting.</td></tr>
+<tr><td>sorting</td><td>Control the default sorting of the list. Defaults to `[[0, "desc"], [1, "desc"]]`. See (http://datatables.net/api#fnSort) for details on formatting.</td></tr>
 </tbody>
 </table>
 
 ## Building from source
 
-There is a Jakefile for building the combined and minified versions with Jake (https://github.com/mde/jake)
+There is a Jakefile for building the combined and minified versions with [Jake](https://github.com/mde/jake)
 and a Makefile for building with make.
 
 
 ## Credits
 
-This code uses some great libraries: jQuery (http://jquery.com/), DataTables (http://datatables.net/),
-and JavaScript BibTeX Parser (http://sourceforge.net/projects/jsbibtex/).
+This code uses some great libraries: [jQuery](http://jquery.com/), [DataTables](http://datatables.net/),
+and [JavaScript BibTeX Parser](http://sourceforge.net/projects/jsbibtex/).
