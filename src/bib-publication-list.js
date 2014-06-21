@@ -43,7 +43,12 @@ var bibtexify = (function($) {
     var bib2html = {
         // the main function which turns the entry into HTML
         entry2html: function(entryData, bib) {
-            var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
+			var type = entryData.entryType.toLowerCase();
+			if(!in_array(type, array_keys(bib2html))) {
+				type = 'misc';
+			}
+
+            var itemStr = htmlify(bib2html[type](entryData));
             itemStr += bib2html.links(entryData);
             itemStr += bib2html.bibtex(entryData);
             if (bib.options.tweet && entryData.url) {
