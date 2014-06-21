@@ -43,7 +43,12 @@ var bibtexify = (function($) {
     var bib2html = {
         // the main function which turns the entry into HTML
         entry2html: function(entryData, bib) {
-            var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
+			var type = entryData.entryType.toLowerCase();
+			if(!in_array(type, array_keys(bib2html))) {
+				type = 'misc';
+			}
+
+            var itemStr = htmlify(bib2html[type](entryData));
             itemStr += bib2html.links(entryData);
             itemStr += bib2html.bibtex(entryData);
             if (bib.options.tweet && entryData.url) {
@@ -230,6 +235,11 @@ var bibtexify = (function($) {
 		jQuery.extend(true, bib2html, this.options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
+			
+			if(!item.year) {
+				item.year = 'To Appear';
+			}
+
             bibentries.push([item.year, bib2html.labels[item.entryType], bib2html.entry2html(item, this)]);
             entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             this.updateStats(item);
