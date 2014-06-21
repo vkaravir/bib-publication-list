@@ -230,6 +230,11 @@ var bibtexify = (function($) {
 		jQuery.extend(true, bib2html, this.options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
+			
+			if(!item.year) {
+				item.year = 'To Appear';
+			}
+
             bibentries.push([item.year, bib2html.labels[item.entryType], bib2html.entry2html(item, this)]);
             entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             this.updateStats(item);

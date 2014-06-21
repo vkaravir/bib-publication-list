@@ -1075,7 +1075,7 @@ BibTex.prototype = {
             while (strrpos(entry,'=') !== false) {
                 position = strrpos(entry, '=');
                 //Checking that the equal sign is not quoted or is not inside a equation (For example in an abstract)
-                var proceed  = true;
+                proceed  = true;
                 if (substr(entry, position-1, 1) == '\\') {
                     proceed = false;
                 }
@@ -1134,6 +1134,8 @@ BibTex.prototype = {
             if (in_array('author', array_keys(ret)) && this._options['extractAuthors']) {
                 ret['author'] = this._extractAuthors(ret['author']);
             }
+
+
         }
         return ret;
     },
@@ -1232,7 +1234,7 @@ BibTex.prototype = {
         //Getting the value (at is only allowd in values)
         if (strrpos(entry,'=') !== false) {
             position = strrpos(entry, '=');
-            var proceed  = true;
+            proceed  = true;
             if (substr(entry, position-1, 1) == '\\') {
                 proceed = false;
             }
@@ -1397,7 +1399,7 @@ BibTex.prototype = {
                 var tmparray     = [];
                 tmparray     = explode(',', author);
                 //The first entry must contain von and last
-                var vonlastarray = [];
+                vonlastarray = [];
                 vonlastarray = explode(' ', tmparray[0]);
                 size         = sizeof(vonlastarray);
                 if (1==size) { //Only one entry.got to be the last
@@ -1864,7 +1866,8 @@ BibTex.prototype = {
         ret += "</p>\n";
         return ret;
     }
-};/*!
+};
+/*!
  * File:        jquery.dataTables.min.js
  * Version:     1.6.2
  * Author:      Allan Jardine (www.sprymedia.co.uk)
@@ -2682,6 +2685,11 @@ var bibtexify = (function($) {
 		jQuery.extend(true, bib2html, this.options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
+			
+			if(!item.year) {
+				item.year = 'To Appear';
+			}
+
             bibentries.push([item.year, bib2html.labels[item.entryType], bib2html.entry2html(item, this)]);
             entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             this.updateStats(item);
