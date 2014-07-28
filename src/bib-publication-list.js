@@ -367,7 +367,6 @@ var bibtexify = (function($) {
         var options = $.extend({}, {'visualization': true,
                                 'sorting': [[0, "desc"], [1, "desc"]]},
                                 opts);
-        var yearBit = 1, typeBit = 0;
         var $pubTable = $("#" + bibElemId).addClass("bibtable");
         if ($("#shutter").size() === 0) {
             $pubTable.before('<div id="shutter" class="hidden"></div>');
@@ -379,7 +378,6 @@ var bibtexify = (function($) {
         var $bibSrc = $(bibsrc);
         if ($bibSrc.length) { // we found an element, use its HTML as bibtex
             new Bib2HTML($bibSrc.html(), $pubTable, options);
-            bibdownloaded();
             $bibSrc.hide();
         } else { // otherwise we assume it is a URL
             var callbackHandler = function(data) {

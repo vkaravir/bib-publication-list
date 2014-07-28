@@ -1075,7 +1075,7 @@ BibTex.prototype = {
             while (strrpos(entry,'=') !== false) {
                 position = strrpos(entry, '=');
                 //Checking that the equal sign is not quoted or is not inside a equation (For example in an abstract)
-                var proceed  = true;
+                proceed  = true;
                 if (substr(entry, position-1, 1) == '\\') {
                     proceed = false;
                 }
@@ -1232,7 +1232,7 @@ BibTex.prototype = {
         //Getting the value (at is only allowd in values)
         if (strrpos(entry,'=') !== false) {
             position = strrpos(entry, '=');
-            var proceed  = true;
+            proceed  = true;
             if (substr(entry, position-1, 1) == '\\') {
                 proceed = false;
             }
@@ -1397,7 +1397,7 @@ BibTex.prototype = {
                 var tmparray     = [];
                 tmparray     = explode(',', author);
                 //The first entry must contain von and last
-                var vonlastarray = [];
+                vonlastarray = [];
                 vonlastarray = explode(' ', tmparray[0]);
                 size         = sizeof(vonlastarray);
                 if (1==size) { //Only one entry.got to be the last
@@ -2819,7 +2819,6 @@ var bibtexify = (function($) {
         var options = $.extend({}, {'visualization': true,
                                 'sorting': [[0, "desc"], [1, "desc"]]},
                                 opts);
-        var yearBit = 1, typeBit = 0;
         var $pubTable = $("#" + bibElemId).addClass("bibtable");
         if ($("#shutter").size() === 0) {
             $pubTable.before('<div id="shutter" class="hidden"></div>');
@@ -2831,7 +2830,6 @@ var bibtexify = (function($) {
         var $bibSrc = $(bibsrc);
         if ($bibSrc.length) { // we found an element, use its HTML as bibtex
             new Bib2HTML($bibSrc.html(), $pubTable, options);
-            bibdownloaded();
             $bibSrc.hide();
         } else { // otherwise we assume it is a URL
             var callbackHandler = function(data) {
