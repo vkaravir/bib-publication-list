@@ -58,6 +58,7 @@ The bibtexify function accepts an optional third parameter for configuration opt
 <tr><td>visualization</td><td>A boolean to control addition of the visualization. Defaults to true.</td></tr>
 <tr><td>tweet</td><td>Twitter username to add Tweet links to bib items with a url field.</td></tr>
 <tr><td>sorting</td><td>Control the default sorting of the list. Defaults to `[[0, "desc"], [1, "desc"]]`. See (http://datatables.net/api#fnSort) for details on formatting.</td></tr>
+<tr><td>defaultYear</td><td>Entries without a year will use this as year. Defaults to "To Appear".
 </tbody>
 </table>
 

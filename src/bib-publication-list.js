@@ -43,7 +43,13 @@ var bibtexify = (function($) {
     var bib2html = {
         // the main function which turns the entry into HTML
         entry2html: function(entryData, bib) {
-            var itemStr = htmlify(bib2html[entryData.entryType.toLowerCase()](entryData));
+            var type = entryData.entryType.toLowerCase();
+            // default to type misc if type is unknown
+            if(array_keys(bib2html).indexOf(type) === -1) {
+                type = 'misc';
+                entryData.entryType = type;
+            }
+            var itemStr = htmlify(bib2html[type](entryData));
             itemStr += bib2html.links(entryData);
             itemStr += bib2html.bibtex(entryData);
             if (bib.options.tweet && entryData.url) {
@@ -185,7 +191,7 @@ var bibtexify = (function($) {
         labels: {
             'article': 'Journal',
             'book': 'Book',
-            'conference': '',
+            'conference': 'Conference',
             'inbook': 'Book chapter',
             'incollection': '',
             'inproceedings': 'Conference',
@@ -199,6 +205,8 @@ var bibtexify = (function($) {
     };
     // format a phd thesis similarly to masters thesis
     bib2html.phdthesis = bib2html.mastersthesis;
+    // conference is the same as inproceedings
+    bib2html.conference = bib2html.inproceedings;
 
     // event handlers for the bibtex links
     var EventHandlers = {
@@ -226,11 +234,15 @@ var bibtexify = (function($) {
         bibtex.content = data;
         bibtex.parse();
         var bibentries = [], len = bibtex.data.length;
-		var entryTypes = {};
-		jQuery.extend(true, bib2html, this.options.bib2html);
+        var entryTypes = {};
+        jQuery.extend(true, bib2html, this.options.bib2html);
         for (var index = 0; index < len; index++) {
             var item = bibtex.data[index];
-            bibentries.push([item.year, bib2html.labels[item.entryType], bib2html.entry2html(item, this)]);
+            if (!item.year) {
+              item.year = this.options.defaultYear || "To Appear";
+            }
+            var html = bib2html.entry2html(item, this);
+            bibentries.push([item.year, bib2html.labels[item.entryType], html]);
             entryTypes[bib2html.labels[item.entryType]] = item.entryType;
             this.updateStats(item);
         }
