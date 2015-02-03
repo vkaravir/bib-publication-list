@@ -7,6 +7,10 @@ First, load the required JavaScript files:
     <script src="jquery.min.js"></script>
     <script src="bib-list-min.js"></script>
 
+Include the CSS:
+
+    <link rel="stylesheet" href="bib-publication-list.css" type="text/css" />
+
 All you need to do is to include the BibTeX into an HTML page and tell the script to turn it 
 into a sortable and searchable table. For example:
 
