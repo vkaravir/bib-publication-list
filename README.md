@@ -11,7 +11,7 @@ Include the CSS:
 
     <link rel="stylesheet" href="bib-publication-list.css" type="text/css" />
 
-All you need to do is to include the BibTeX into an HTML page and tell the script to turn it 
+All you need to do is to include the BibTeX into an HTML page and tell the script to turn it
 into a sortable and searchable table. For example:
 
     <table id="pubTable" class="display"></table>
@@ -28,12 +28,12 @@ into a sortable and searchable table. For example:
     }
     </pre>
 
-Finally, the bib-publication-list needs to know the input data element and the output table. So, one 
+Finally, the bib-publication-list needs to know the input data element and the output table. So, one
 line of JavaScript:
 
     bibtexify("#bibtex", "pubTable");
 
-Alternatively, the bibtex can be loaded from a file. Personally I prefer including it in the HTML, 
+Alternatively, the bibtex can be loaded from a file. Personally I prefer including it in the HTML,
 though. This way, browsers without JavaScript enabled get at least to see the bibtex instead of a blank page.
 This causes an ugly-looking flash of unstyled content, though.
 
@@ -61,7 +61,8 @@ The bibtexify function accepts an optional third parameter for configuration opt
 <tbody>
 <tr><td>visualization</td><td>A boolean to control addition of the visualization. Defaults to true.</td></tr>
 <tr><td>tweet</td><td>Twitter username to add Tweet links to bib items with a url field.</td></tr>
-<tr><td>sorting</td><td>Control the default sorting of the list. Defaults to `[[0, "desc"], [1, "desc"]]`. See (http://datatables.net/api#fnSort) for details on formatting.</td></tr>
+<tr><td>sorting</td><td>Control the default sorting of the list. Defaults to `[[0, "desc"], [1, "desc"]]`. See (https://legacy.datatables.net/api#fnSort) for details on formatting.</td></tr>
+<tr><td>datatable</td><td>Pass options to the datatable library used to create the table of publications. See (https://legacy.datatables.net/api) for available options.</td></tr>
 <tr><td>defaultYear</td><td>Entries without a year will use this as year. Defaults to "To Appear".
 </tbody>
 </table>

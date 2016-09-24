@@ -256,13 +256,13 @@ var bibtexify = (function($) {
                 item2 = bib2html.importance[entryTypes[y]];
             return ((item1 < item2) ? 1 : ((item1 > item2) ?  -1 : 0));
         };
-        var table = this.$pubTable.dataTable({ 'aaData': bibentries,
+        var table = this.$pubTable.dataTable($.extend({ 'aaData': bibentries,
                               'aaSorting': this.options.sorting,
                               'aoColumns': [ { "sTitle": "Year" },
                                              { "sTitle": "Type", "sType": "type-sort", "asSorting": [ "desc", "asc" ] },
                                              { "sTitle": "Publication", "bSortable": false }],
                               'bPaginate': false
-                            });
+                            }, this.options.datatable));
         if (this.options.visualization) {
             this.addBarChart();
         }
