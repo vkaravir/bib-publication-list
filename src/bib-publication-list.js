@@ -380,7 +380,7 @@ var bibtexify = (function($) {
                                 'sorting': [[0, "desc"], [1, "desc"]]},
                                 opts);
         var $pubTable = $("#" + bibElemId).addClass("bibtable");
-        if ($("#shutter").size() === 0) {
+        if ($("#shutter").length === 0) {
             $pubTable.before('<div id="shutter" class="hidden"></div>');
             $("#shutter").click(EventHandlers.hidebib);
         }
