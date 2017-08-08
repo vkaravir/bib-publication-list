@@ -2487,6 +2487,7 @@ var bibtexify = (function($) {
             .replace(/\\'a/g, '&aacute;')
             .replace(/\\'A/g, '&Aacute;')
             .replace(/\\"o/g, '&ouml;')
+            .replace(/\\"u/g, '&uuml;')
             .replace(/\\ss\{\}/g, '&szlig;')
             .replace(/\{/g, '')
             .replace(/\}/g, '')
@@ -2506,6 +2507,7 @@ var bibtexify = (function($) {
             .replace(/\\'a/g, '%C3%A1')
             .replace(/\\'A/g, '%C3%81')
             .replace(/\\"o/g, '%C3%B6')
+            .replace(/\\"u/g, '%C3%BC')
             .replace(/\\ss\{\}/g, '%C3%9F')
             .replace(/\{/g, '')
             .replace(/\}/g, '')
@@ -2535,6 +2537,7 @@ var bibtexify = (function($) {
         // converts the given author data into HTML
         authors2html: function(authorData) {
             var authorsStr = '';
+            if (!authorData) { return authorsStr ;}
             for (var index = 0; index < authorData.length; index++) {
                 if (index > 0) { authorsStr += ", "; }
                 authorsStr += authorData[index].last;
@@ -2587,14 +2590,16 @@ var bibtexify = (function($) {
             return spl[spl.length-1];
           };
           var auth = entryData.author;
-          if (auth.length == 1) {
+          if (!auth) {
+            // nothing to do
+          } else if (auth.length == 1) {
             itemStr += uriencode(splitName(auth[0].last));
           } else if (auth.length == 2) {
             itemStr += uriencode(splitName(auth[0].last) + "%26" + splitName(auth[1].last));
           } else {
             itemStr += uriencode(splitName(auth[0].last) + " et al");
           }
-          itemStr += ": " + encodeURIComponent('"' + entryData.title + '"');
+          itemStr += ": " + uriencode(entryData.title);
           itemStr += '" target="_blank">tweet</a>)';
           return itemStr;
         },
