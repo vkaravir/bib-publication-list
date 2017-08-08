@@ -12,6 +12,8 @@ span.undefined { color:red; }
 .unpublished { background-color: #eae; }
 .mastersthesis { background-color: #eea; }
 .techreport { background-color: #b77; }
+.proceedings { background-color: #9494ff; }
+.book { background-color: #ed7878; }
 .legend .pub { width: 10px; height: 10px; display: inline-block; margin: 0 5px 0 15px;}
 .legend { margin-bottom: 20px; text-align: center; width: 100%;}
 table.display thead th { padding: 3px 18px 3px 10px; border-bottom: 1px solid black; border-top: 1px solid black; font-weight: bold; cursor: pointer; cursor: hand; }

@@ -160,7 +160,7 @@ var bibtexify = (function($) {
                 entryData.number + ". " + entryData.type + ".";
         },
         book: function(entryData) {
-            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+            return this.authors2html(entryData.author || entryData.editor) + " (" + entryData.year + "). " +
                 " <em>" + entryData.title + "<\/em>, " +
                 entryData.publisher + ", " + entryData.year +
                 ((entryData.issn)?", ISBN: " + entryData.issn + ".":".");
@@ -174,6 +174,16 @@ var bibtexify = (function($) {
                 ((entryData.volume)?", Vol. " + entryData.volume + "":"") +
                 ((entryData.issn)?", ISBN: " + entryData.issn + "":"") +
                 ".";
+        },
+        proceedings: function(entryData) {
+            return this.authors2html(entryData.editor) + ", editor(s) (" + entryData.year + "). " +
+                " <em>" + entryData.title + ".<\/em>" +
+                ((entryData.volume)?", Vol. " + entryData.volume + "":"") +
+                ((entryData.address)?", " + entryData.address:"") + ". " +
+                ((entryData.organization)? + entryData.organization:"") +
+                ((entryData.organization && entryData.publisher)?", ":"") +
+                (entryData.publisher?entryData.publisher + ". ":"") +
+                (entryData.note?entryData.note:"");
         },
         // weights of the different types of entries; used when sorting
         importance: {
@@ -189,6 +199,7 @@ var bibtexify = (function($) {
             'article': 80,
             'phdthesis': 90,
             'inbook': 100,
+            'proceedings': 105,
             'book': 110,
             'unpublished': 120
         },
