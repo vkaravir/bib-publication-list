@@ -259,10 +259,14 @@ var bibtexify = (function($) {
             if (!item.year) {
               item.year = this.options.defaultYear || "To Appear";
             }
-            var html = bib2html.entry2html(item, this);
-            bibentries.push([item.year, bib2html.labels[item.entryType], html]);
-            entryTypes[bib2html.labels[item.entryType]] = item.entryType;
-            this.updateStats(item);
+            try {
+                var html = bib2html.entry2html(item, this);
+                bibentries.push([item.year, bib2html.labels[item.entryType], html]);
+                entryTypes[bib2html.labels[item.entryType]] = item.entryType;
+                this.updateStats(item);
+            } catch (e) {
+                console.error('Failed to process entry: ', item);
+            }
         }
         jQuery.fn.dataTableExt.oSort['type-sort-asc'] = function(x, y) {
             var item1 = bib2html.importance[entryTypes[x]],
