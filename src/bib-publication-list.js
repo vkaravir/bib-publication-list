@@ -2,6 +2,7 @@
 var bibtexify = (function($) {
     // helper function to "compile" LaTeX special characters to HTML
     var htmlify = function(str) {
+        if (!str) { return ''; }
         // TODO: this is probably not a complete list..
         str = str.replace(/\\"\{a\}/g, '&auml;')
             .replace(/\{\\aa\}/g, '&aring;')
@@ -22,6 +23,7 @@ var bibtexify = (function($) {
         return str;
     };
     var uriencode = function(str) {
+        if (!str) { return ''; }
         // TODO: this is probably not a complete list..
         str = str.replace(/\\"\{a\}/g, '%C3%A4')
             .replace(/\{\\aa\}/g, '%C3%A5')
