@@ -65,10 +65,14 @@ var bibtexify = (function($) {
         // converts the given author data into HTML
         authors2html: function(authorData) {
             var authorsStr = '';
+            var author;
             if (!authorData) { return authorsStr ;}
             for (var index = 0; index < authorData.length; index++) {
                 if (index > 0) { authorsStr += ", "; }
-                authorsStr += authorData[index].last;
+                author = authorData[index];
+                authorsStr += author.first
+                              + (author.von ? ' ' + author.von + ' ' : ' ')
+                              + author.last;
             }
             return htmlify(authorsStr);
         },
