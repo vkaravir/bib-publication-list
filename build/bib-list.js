@@ -2620,6 +2620,14 @@ var bibtexify = (function($) {
                 ", pp. " + entryData.pages +
                 ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
         },
+        incollection: function(entryData) {
+            return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
+                entryData.title + ". In " +
+                ((entryData.editor)?"" + this.authors2html(entryData.editor) + ", editor, ":"") +
+                "<em>" + entryData.booktitle +
+                ", pp. " + entryData.pages +
+                ((entryData.address)?", " + entryData.address:"") + ".<\/em>";
+        },
         article: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.title + ". <em>" + entryData.journal + ", " + entryData.volume +
@@ -2652,7 +2660,7 @@ var bibtexify = (function($) {
         inbook: function(entryData) {
             return this.authors2html(entryData.author) + " (" + entryData.year + "). " +
                 entryData.chapter + " in <em>" + entryData.title + "<\/em>, " +
-                ((entryData.editor)?" Edited by " + entryData.editor + ", ":"") +
+                ((entryData.editor)?" Edited by " + this.authors2html(entryData.editor) + ", ":"") +
                 entryData.publisher + ", pp. " + entryData.pages + "" +
                 ((entryData.series)?", <em>" + entryData.series + "<\/em>":"") +
                 ((entryData.volume)?", Vol. " + entryData.volume + "":"") +
@@ -2693,7 +2701,7 @@ var bibtexify = (function($) {
             'book': 'Book',
             'conference': 'Conference',
             'inbook': 'Book chapter',
-            'incollection': '',
+            'incollection': 'In Collection',
             'inproceedings': 'Conference',
             'manual': 'Manual',
             'mastersthesis': 'Thesis',
