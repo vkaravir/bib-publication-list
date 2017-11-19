@@ -2813,12 +2813,24 @@ var bibtexify = (function($) {
     };
     // adds the barchart of year and publication types
     bibproto.addBarChart = function addBarChart() {
-        var yearstats = [], max = 0;
+        var yearstats = [];
+        var maxItems = 0;
+        var maxTypes = 0;
         $.each(this.stats, function(key, value) {
-            max = Math.max(max, value.count);
+            var types = [];
+            $.each(value.types, function(type) {
+              types.push(type);
+            });
+            types.sort(function(x, y) {
+              return bib2html.importance[y] - bib2html.importance[x];
+            });
+
             yearstats.push({'year': key, 'count': value.count,
-                'item': value, 'types': value.types});
+                'item': value, 'types': value.types, typeArr: types});
+            maxItems = Math.max(maxItems, value.count);
+            maxTypes = Math.max(maxTypes, types.length);
         });
+        var isTypeMode = maxItems > 15;
         yearstats.sort(function(a, b) {
             var diff = a.year - b.year;
             if (!isNaN(diff)) {
@@ -2830,36 +2842,39 @@ var bibtexify = (function($) {
             }
             return 0;
         });
-        var chartIdSelector = "#" + this.$pubTable[0].id + "pubchart";
-        var pubHeight = $(chartIdSelector).height()/max - 2;
-        var styleStr = chartIdSelector +" .year { width: " +
-                        (100.0/yearstats.length) + "%; }" +
-                        chartIdSelector + " .pub { height: " + pubHeight + "px; }";
+        var chartIdSelector = '#' + this.$pubTable[0].id + 'pubchart';
+        var chartHeight = $(chartIdSelector).height();
+        var styleStr = chartIdSelector + ' .year { width: ' +
+                        (100.0/yearstats.length) + '%; }';
         var legendTypes = [];
         var stats2html = function(item) {
-            var types = [],
-                str = '<div class="year">',
-                sum = 0;
-            $.each(item.types, function(type, value) {
-              types.push(type);
-              sum += value;
-            });
-            types.sort(function(x, y) {
-              return bib2html.importance[y] - bib2html.importance[x];
-            });
-            str += '<div class="filler" style="height:' + ((pubHeight+2)*(max-sum)) + 'px;"></div>';
+            var types = item.typeArr;
+            var borderHeight = isTypeMode ? types.length * 2 : item.count * 2;
+            var totalHeight = item.count / maxItems * chartHeight;
+            var pubHeight = (totalHeight - borderHeight) / item.count;
+            var str = '<div class="year">';
+            str += '<div class="filler" style="height:' + (chartHeight - totalHeight) + 'px;"></div>';
+            var itemStr = '';
             for (var i = 0; i < types.length; i++) {
                 var type = types[i];
                 if (legendTypes.indexOf(type) === -1) {
                     legendTypes.push(type);
                 }
-                for (var j = 0; j < item.types[type]; j++) {
-                    str += '<div class="pub ' + type + '"></div>';
+                if (isTypeMode) {
+                    // just one block for publication type
+                    itemStr += '<div style="height:' + (item.types[type] * pubHeight) + 'px" class="pub ' + type + '"></div>';
+                } else {
+                    // one block for each entry of the publication type
+                    for (var j = 0; j < item.types[type]; j++) {
+                        itemStr += '<div style="height:' + pubHeight + 'px" class="pub ' + type + '"></div>';
+                    }
                 }
             }
+            str += itemStr;
+
             return str + '<div class="yearlabel">' + item.year + '</div></div>';
         };
-        var statsHtml = "<style>" + styleStr + "</style>";
+        var statsHtml = '<style>' + styleStr + '</style>';
         yearstats.forEach(function(item) {
             statsHtml += stats2html(item);
         });
