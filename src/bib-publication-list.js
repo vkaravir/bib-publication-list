@@ -81,17 +81,17 @@ var bibtexify = (function($) {
             var itemStr = '';
             if (entryData.url && entryData.url.match(/.*\.pdf/)) {
                 itemStr += ' (<a title="PDF-version of this article"  target="_blank" href="' +
-                            entryData.url + '">pdf<\/a>)';
+                            entryData.url + '"><i class="fa fa-file-pdf-o fa-fw" style="color:red"></i> pdf<\/a>)';
             } else if (entryData.url) {
                 itemStr += ' (<a title="This article online" target="_blank" href="' + entryData.url +
-                            '">link<\/a>)';
+                            '"><i class="fa fa-external-link fa-fw" style="color:blue"></i>link<\/a>)';
             }
             return itemStr;
         },
         // adds the bibtex link and the opening div with bibtex content
         bibtex: function(entryData) {
             var itemStr = '';
-            itemStr += ' (<a title="This article as BibTeX" href="#" class="biblink">' +
+            itemStr += ' (<a title="This article as BibTeX" href="#" class="biblink"><i class="fa fa-file-text-o fa-fw" style="color:green"></i> ' +
                         'bib</a>)<div class="bibinfo hidden">';
             itemStr += '<a href="#" class="bibclose" title="Close">x</a><pre>';
             itemStr += '@' + entryData.entryType + "{" + entryData.cite + ",\n";
